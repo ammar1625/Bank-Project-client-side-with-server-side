@@ -12,9 +12,107 @@
     <link rel="stylesheet" href="styles/login.css">
     <link rel="icon" href="images/wise-green.png" type="image/x-icon">
     <script defer src="scripts/login.js"></script>
-    <title>Wise</title>
+    <title>Wise Log in</title>
 </head>
 <body>
+
+    <div class="header">
+        <img src="images/logo.png" alt="logo" class="logo">
+    </div>
+
+    <div class="body">
+
+        <div class="welcome-ctr">
+            <h1 class="welcome-label">Welcome Back</h1>
+            <p class="sign-up">New to Wise? <a href="" class="link">Sign up</a></p>
+        </div>
+
+        <div class="form-ctr">
+            <div class="email-ctr">
+              <p class="field-description">your e-mail address</p>
+              <input type="email" class="e-mail-input">
+              
+            </div>
+
+            <div class="password-ctr">
+                <p class="field-description">your password</p>
+                <input type="password" class="password-input">
+            </div>
+
+            <div class="error-ctr hidden">
+                <h2 class="error-msg ">❌ wrong e-mail/password please try again</h2>
+            </div>
+
+            <div class="login-btn-ctr">
+                <button class="log-in-btn">Log in</button>
+            </div>
+        </div>
+
+        <div class="login-options-ctr">
+            <p class="text">or Log-in with</p>
+            <div class="buttons-ctr">
+                <button class="fb btn"><img src="images/facebook.png" alt="" class="logo-img"></button>
+                <button class="google btn"><img src="images/google.png" alt="" class="logo-img"></button>
+                <button class="apple btn"><img src="images/apple.png" alt="" class="logo-img"></button>
+            </div>
+       
+        </div>
+
+    </div>
+
+    <div class="overlay hidden">
+        <div class="open-account-model hidden">
+            <div class="title-ctr">
+                <h1 class="title">Create account</h1>
+            </div>
+            <div class="form">
+                <div class="field">
+                    <p class="label">first name </p>
+                    <input type="text" class="input-field f-name">
+                </div>
+
+                <div class="field">
+                    <p class="label">last name </p>
+                    <input type="text" class="input-field l-name">
+                </div>
+
+                <div class="field">
+                    <p class="label">e-mail </p>
+                    <input type="email" class="input-field e-mail">
+                </div>
+
+                <div class="field">
+                    <p class="label">phone number</p>
+                    <input type="tel" class="input-field phone">
+                </div>
+
+                <div class="field">
+                    <p class="label">date of birth </p>
+                    <input type="date" class="input-field birth-date">
+                </div>
+
+                <div class="field">
+                    <p class="label">user name </p>
+                    <input type="text" class="input-field user-name">
+                </div>
+
+                <div class="field">
+                    <p class="label">password </p>
+                    <input type="text" class="input-field password">
+                </div>
+
+                <div class="field">
+                    <p class="label">comfirm password </p>
+                    <input type="text" class="input-field comfirm-password">
+                </div>
+
+                <button class="submit">submit</button>
+                
+        </div>
+        <button class="close-btn">X</button>
+        </div>
+
+    </div>
     
 </body>
 </html>
