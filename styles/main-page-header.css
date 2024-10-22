@@ -1,0 +1,49 @@
+
+*
+{
+    padding: 0;
+    margin: 0;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "roboto";
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    border-bottom: 2px solid rgb(180, 180, 180);
+}
+
+.logo
+{
+    width: 150px;
+    margin-left: 90px;
+}
+
+.welcome-msg,.current-balance
+{
+    font-size: 35px;
+    font-weight: 700;
+    color: rgb(94, 93, 93);
+    word-spacing: 10px;
+}
+
+.user,.ammount,.currency
+{
+    color: rgb(53, 52, 52);
+}
+
+.current-balance
+{
+
+}

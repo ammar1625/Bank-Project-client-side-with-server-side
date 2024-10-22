@@ -9,11 +9,131 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/main-page.css">
+    <link rel="icon" href="images/wise-green.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/main-page-header.css">
+    <link rel="stylesheet" href="styles/main-page-body.css">
     <script defer src="scripts/main-page.js" type="module"></script>
     <title>home</title>
 </head>
 <body>
+    <!--header section-->
+    <div class="header">
+        <img src="images/logo.png" alt="logo" class="logo">
+        <div class="welcome-msg-ctr">
+            <h1 class="welcome-msg">Welcome   <span class="user">Ammar!</span></h1>
+        </div>
+
+        <div class="current-balance-ctr">
+                
+            <h1 class="current-balance">current balance <span class="ammount">2500.00</span><span class="currency">$</span></h1>
+        </div>
+    </div>
+
+    <!--body section-->
+    <div class="body">
+
+        <div class="side-bar">
+            <button class="depo&withd side-btn"><img class="side-bar-icon" src="icons/depowithdraw.png"> deposit & withdraw</button>
+            <button class="transactions side-btn"><img class="side-bar-icon" src="icons/transfer.png"> transactions</button>
+            <button class="personal-infos side-btn"><img class="side-bar-icon" src="icons/personl-infos.png">personal infos</button>
+            <button class="close-acc side-btn"><img class="side-bar-icon" src="icons/close-account.png">close account</button>
+            <button class="log-out side-btn"><img class="side-bar-icon" src="icons/sign_out.png">log-out</button>
+        </div>
+
+        <div class="main-body ">
+            <div class="header-ctr">
+                <h1 class="header-title"><img src="icons/depowithdraw.png" class="header-img">deposit & withdraw</h1>
+            </div>
+           
+            <div class="main-ctr">
+                <div class="left-side">
+                    <div class="history-ctr">
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                        <div class="history-el">
+                            <p class="movement-type">deposit</p>
+                            <p class="movement-date">27-03-2022</p>
+                            <p class="movement-ammount">1200.00$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side">
+                    <div class="deposits-ctr">
+
+                        <div class="title-container">deposit</div>
+
+                        <div class="deposits-inputs-div">
+                            <div class="deposits-ammount-div">
+                                 <input type="number" class="deposits-ammount-input">
+                                
+                            </div>
+                           
+                            <button class="deposit-btn">&#10145;</button>
+                        </div>
+                        
+                    </div>
+
+                    <div class="withdraws-ctr">
+
+                        <div class="title-container">withdraw</div>
+
+                        <div class="withdraws-inputs-div">
+                            <div class="withdraws-ammount-div">
+                                 <input type="number" class="withdraws-ammount-input">
+                                
+                            </div>
+                           
+                            <button class="withdraw-btn">&#10145;</button>
+                        </div>
+                        
+                    </div>
+
+                 
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     
 </body>
 </html>
