@@ -12,6 +12,7 @@
     <link rel="icon" href="images/wise-green.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/main-page-header.css">
     <link rel="stylesheet" href="styles/main-page-body.css">
+    <link rel="stylesheet" href="styles/personal-infos.css">
     <script defer src="scripts/main-page.js" type="module"></script>
     <title>home</title>
 </head>
@@ -41,7 +42,7 @@
             </div>
 
             <div class="main-body ">
-                <div class="deposits-withdraws-ctr ">
+                <div class="deposits-withdraws-ctr hidden">
                     <div class="header-ctr">
                         <h1 class="dep-header-title header-title"><img src="icons/depowithdraw.png" class="dep-header-img header-img">deposit & withdraw</h1>
                     </div>
@@ -143,8 +144,127 @@
                     </div>
                 </div>
 
+                <div class="personal-infos-ctr ">
+                    <div class="header-ctr">
+                        <h1 class="tran-header-title header-title"><img src="icons/personl-infos.png" class="personal header-img">personal infos</h1>
+                    </div>
+                
+                    <div class="infos-ctr">
+                        <div class="info-ctr ">
+                            <p class="infos-label">First name :</p>
+                            <p class="f-name info">Ammar </p>
+                        </div>
+                        <div class="info-ctr">
+                            <p class="infos-label">Last name :</p>
+                            <p class="l-name info">bouzenka </p>
+                        </div>
+                        <div class="info-ctr">
+                            <p class="infos-label">User name :</p>
+                            <p class="user-name info">Ammar25 </p>
+                        </div>
+                        <div class="info-ctr">
+                            <p class="infos-label">e-mail :</p>
+                            <p class="e-mail info">ammarbozuenka25@gmail.com </p>
+                        </div>
+                        <div class="info-ctr">
+                            <p class="infos-label">phone number :</p>
+                            <p class="phone info">0790409726 </p>
+                        </div>
+                        <div class="info-ctr">
+                            <p class="infos-label">date of birth :</p>
+                            <p class="b-date info">16-07-1992 </p>
+                        </div>
+                    </div>
+
+                    <div class="btns-ctr">
+                        <button class="update-btn btn">update infos</button>
+                        <button class="change-password-btn btn">change password</button>
+                    </div>
+                </div>
+
             </div>
     </div>
-    
+    <div class="overlay hidden">
+     
+    </div>
+    <div class="open-account-model update-infos-model hidden">
+            <div class="title-ctr">
+                <h1 class="title">update infos</h1>
+            </div>
+            <div class="form">
+                <div class="field">
+                    <p class="label">first name </p>
+                    <input type="text" class="input-field f-name update-fname">
+                </div>
+
+                <div class="field">
+                    <p class="label">last name </p>
+                    <input type="text" class="input-field l-name update-lname">
+                </div>
+
+                <div class="field">
+                    <p class="label">e-mail </p>
+                    <input type="email" class="input-field e-mail update-e-mail">
+                </div>
+
+                <div class="field">
+                    <p class="label">phone number</p>
+                    <input type="tel" class="input-field phone update-phone">
+                </div>
+
+                <div class="field">
+                    <p class="label">date of birth </p>
+                    <input type="date" class="input-field birth-date update-b-date">
+                </div>
+
+                <div class="field">
+                    <p class="label">user name </p>
+                    <input type="text" class="input-field user-name update-user-name">
+                </div>
+
+            
+                <p class="empty-field-error hidden">you must fill all the fields !</p>
+                <button class="submit">submit</button>
+                
+        </div>
+        <button class="close-btn">X</button>
+    </div>
+
+    <div class="open-account-model change-password-model hidden">
+        <div class="title-ctr">
+            <h1 class="title">change password</h1>
+        </div>
+        <div class="form ">
+            <div class="field">
+                <p class="label">current password </p>
+                <input type="password" class="input-field current-password">
+            </div>
+            <div class="field">
+                <p class="label">new password </p>
+                <input type="password" class="input-field new-password">
+            </div>
+
+            <div class="field">
+                <p class="label">comfirm password </p>
+                <input type="password" class="input-field comfirm-password">
+            </div>
+
+        
+            <p class="empty-field-error hidden">you must fill all the fields !</p>
+            <button class="submit">submit</button>
+            
+    </div>
+    <button class="close-btn">X</button>
+</div>
+
+<div class="comfirm-msg hidden">
+    <div class="dialog">
+        <p class="message">do you want to perform this action?</p>
+    </div>
+    <div class="buttons">
+        <button class="button yes">yes</button>
+        <button class="button no">no</button>
+    </div>
+</div>
 </body>
 </html>

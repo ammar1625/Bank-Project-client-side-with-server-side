@@ -1,218 +1,80 @@
 
-/*log-in styles */
-
-*
+.personal-infos-ctr
 {
-    padding: 0;
-    margin: 0;
-}
-
-body
-{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: "roboto";
-}
-
-.header
-{
-    display: flex;
     justify-content: start;
     align-items: center;
-    width: 100%;
-    height: 120px;
-    border-bottom: 2px solid rgb(180, 180, 180);
+   
 }
 
-.logo
+.infos-ctr
 {
-    width: 150px;
-    margin-left: 90px;
-}
-
-.body
-{
+    width: 75%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 99%;
-    position: relative;
-}
-
-.welcome-ctr
-{
-    height: 80px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
+  
+    height: 200px;
+    text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-.welcome-label
-{
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.sign-up
-{
-    font-size: 18px;
-    font-weight: 400;
-    color: rgb(58, 58, 58);
-   
-}
-
-.link
-{
-    font-size: 18px;
-    font-weight: 400;
-    color: #163300;
-   
-}
-
-.form-ctr
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-top: 30px;
-}
-
-.field-description
-{
-    font-size: 18px;
-    font-weight: 400;
-    color: rgb(58, 58, 58) ;
-}
-
-
-.e-mail-input , .password-input
-{
-    height: 40px;
-    width: 450px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 18px;
-    font-weight: 600;
-    color: rgb(71, 71, 71);
     background-color: aliceblue;
-    margin-top: 5px;
     border-radius: 10px;
 }
 
-.email-ctr , .password-ctr , .error-ctr , .login-btn-ctr
+.info-ctr
 {
-    height: 80px;
-    width: 35%;
-    text-align: left;
-}
-.login-btn-ctr
-{
-    text-align: center;
-    padding-top: 20px;
-}
-
-.error-ctr
-{
-    transition: all 0.5s;
-}
-
-.error-msg
-{
-    font-size: 20px;
-    font-weight: 500;
-    color: crimson;
-    padding-top: 10px;
+   width: 43%;
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   font-size: 19px;
+   font-weight: 500;
+   color: rgb(39, 39, 39);
 }
 
 
 
-.log-in-btn
+.info
 {
-    background: #9fe870;
-    width: 95%;
-    height: 40px;
-    border-radius: 19px;
-    font-size: 17px;
+    color: rgb(27, 27, 27);
     font-weight: 600;
-    border: none;
-    transition: all 0.5s;
+    font-size: 19px;
+}
+
+.btns-ctr
+{
+    padding: 25px 20px;
+    
+}
+
+.btn
+{
+    height: 50px;
+    width: 160px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(43, 42, 42);
+    border: 1px solid rgb(128, 185, 235);
+    border-radius: 10px;
     cursor: pointer;
-    color: rgb(54, 54, 54);
+    transition: all 0.9;
 }
-
-.log-in-btn:hover
+.btn:hover
 {
-    background: #79e038;
+    background-color: rgba(144, 152, 160, 0.349);
 }
 
-.login-options-ctr
-{
-    width: 35%;
-}
 
-.buttons-ctr
-{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 10px;
-}
-
-.text
-{
-    margin-left: 10px;
-    font-size: 18px;
-    font-weight: 400;
-    color: rgb(44, 43, 43);
-}
-
-.logo-img
-{
-    width: 30px;
-    height: 30px;
-}
-
-.fb , .google , .apple
-{
-    height: 40px;
-    width: 150px;
-    border-radius: 20px;
-    border: 1px solid gray;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
-.fb:hover
-{
-    background-color: rgba(28, 28, 245, 0.397);
-}
-
-.google:hover
-{
-    background-color: rgba(9, 9, 134, 0.651);
-}
-
-.apple:hover
-{
-    background-color: rgba(59, 59, 61, 0.651);
-}
-
+/*overlay styles*/
 .overlay
 {
     position: absolute;
     top: 0;
-    bottom: -20px;
+    bottom: -70px;
     left: 0;
     right: 0;
     background-color: rgba(119, 117, 117, 0.274);
@@ -334,6 +196,13 @@ body
     box-shadow: 2px 2px 5px  #8d9c84;
 }
 
+.empty-field-error
+{
+    color: crimson;
+    font-size: 18px;
+    font-weight: 500;
+}
+
 .comfirm-msg
 {
     position: absolute;
@@ -385,7 +254,6 @@ body
 {
     background-color: crimson;
 }
-
 .hidden
 {
     /* visibility: hidden; */
