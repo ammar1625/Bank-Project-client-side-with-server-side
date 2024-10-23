@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/main-page-header.css">
     <link rel="stylesheet" href="styles/main-page-body.css">
     <link rel="stylesheet" href="styles/personal-infos.css">
+    <link rel="stylesheet" href="styles/close-account.css"> 
     <script defer src="scripts/main-page.js" type="module"></script>
     <title>home</title>
 </head>
@@ -42,7 +43,7 @@
             </div>
 
             <div class="main-body ">
-                <div class="deposits-withdraws-ctr hidden">
+                <div class="deposits-withdraws-ctr ">
                     <div class="header-ctr">
                         <h1 class="dep-header-title header-title"><img src="icons/depowithdraw.png" class="dep-header-img header-img">deposit & withdraw</h1>
                     </div>
@@ -144,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="personal-infos-ctr ">
+                <div class="personal-infos-ctr hidden">
                     <div class="header-ctr">
                         <h1 class="tran-header-title header-title"><img src="icons/personl-infos.png" class="personal header-img">personal infos</h1>
                     </div>
@@ -181,6 +182,31 @@
                         <button class="change-password-btn btn">change password</button>
                     </div>
                 </div>
+
+                <div class="close-account-ctr hidden">
+                    <div class="header-ctr">
+                        <h1 class="tran-header-title header-title"><img src="icons/close-account.png" class="close-acc header-img">close account</h1>
+                    </div>
+
+                    <div class="comfirm-inputs-ctr">
+                        <div class="field-ctr">
+                            <p class="txt">user name</p>
+                            <input type="text" class="comfirm-user comfirm-field">
+                        </div>
+                        <div class="field-ctr">
+                            <p class="txt">password</p>
+                            <input type="password" class="comfirm-password comfirm-field">
+                        </div>
+                    </div>
+
+                    <div class="error-ctr invisible">
+                        <h2 class="error-message">wrong user-name/password!</h2>
+                    </div>
+
+                    <div class="close-acc-btn-ctr">
+                        <button class="close-acc-btn">close account</button>
+                    </div>
+                
 
             </div>
     </div>
