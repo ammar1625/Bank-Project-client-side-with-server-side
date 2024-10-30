@@ -73,7 +73,8 @@ let FieldsEl = document.querySelectorAll(".input-field");
 }
 
  let CurrentUser = null ;
-export {CurrentUser};
+
+
 let CurrentDate = new Date();
 
 function showOpenAccountForm()
@@ -496,7 +497,7 @@ function PerformLogin()
                         CurrentUser = currentUserRes;
                         LogInEmailInputEl.value = "";
                         LogInPassWordInputEl.value ="";
-                        location.href= "http://127.0.0.1:5500/index.html";
+                        location.href= "http://127.0.0.1:5500/home.html";
                         });
                     },3000)
                 }
