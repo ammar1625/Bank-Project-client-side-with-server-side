@@ -6,6 +6,8 @@ let SignUpLinkEl = document.querySelector(".link");
 let LogInEmailInputEl = document.querySelector(".e-mail-input");
 let LogInPassWordInputEl = document.querySelector(".password-input");
 let LogInBtnEl = document.querySelector(".log-in-btn");
+let ErrorMsgCtr = document.querySelector(".error-ctr");
+let LogInErrorMessageEl = document.querySelector(".error-msg");
 
 let LogInOverLayEl = document.querySelector(".overlay");
 let OpenAccountFormEl = document.querySelector('.open-account-model');
@@ -70,6 +72,8 @@ let FieldsEl = document.querySelectorAll(".input-field");
     }
 }
 
+ let CurrentUser ;
+
 let CurrentDate = new Date();
 
 function showOpenAccountForm()
@@ -79,6 +83,16 @@ function showOpenAccountForm()
     LogInOverLayEl.classList.remove("hidden");
     OpenAccountFormEl.classList.remove("hidden");
     })
+}
+
+function ShowWronLoginInfosMsg()
+{
+    ErrorMsgCtr.classList.remove("hidden");
+}
+
+function hideWrongLoginInfoMsg()
+{
+    ErrorMsgCtr.classList.add("hidden");
 }
 
 function hideOpenAccountForm()
@@ -98,6 +112,14 @@ function changeInputBackGround(field)
 {
     field.style.backgroundColor = "rgba(220, 20, 60, 0.351)";
     field.style.border = "solid 1px red"
+}
+
+function ResetLoginInputsBackGround(emailInput, passwordInput)
+{
+    emailInput.style.backgroundColor = "aliceblue";
+    passwordInput.style.backgroundColor = "aliceblue";
+    emailInput.style.border = "solid 1px gray";
+    passwordInput.style.border = "solid 1px gray";
 }
 
 function resetInputBackGround()
@@ -400,6 +422,100 @@ function ValidateUserNameInput()
     })
 }
 
+async function HasPermissionToLogIn(email,password)
+{
+    try
+    {
+        let UserLogInresponse = await fetch(`http://localhost:5104/api/Users/${email},${password}`);
+
+        if(!UserLogInresponse.ok)
+            {
+                throw new Error(`${UserLogInresponse.statusText}`);
+            }
+
+        let data = UserLogInresponse.json();
+
+        return data;
+    }
+    catch(err)
+    {
+
+    }
+
+    return null;
+}
+
+async function GetCurrentUser(email,password)
+{
+    try
+    {
+        let userResponse = await
+         fetch(`http://localhost:5104/api/Users/FindUserByEmailPassWord?Email=${email}&PassWord=${password}`);
+
+         if(!userResponse.ok)
+            {
+                throw new Error(`${userResponse.statusText}`);
+            }
+
+        let userData =await userResponse.json();
+
+        return userData;
+    }
+    catch(err)
+    {
+
+    }
+
+    return null;
+}
+
+function PerformLogin()
+{
+    LogInBtnEl.addEventListener("click",()=>{
+
+        //if the log in fields are both empty show error message and return
+        if(!LogInEmailInputEl.value || !LogInPassWordInputEl.value)
+            {
+                LogInErrorMessageEl.textContent = "❌ all the fields above are required !";
+                ShowWronLoginInfosMsg();
+                changeInputBackGround(LogInEmailInputEl);
+                changeInputBackGround(LogInPassWordInputEl);
+                return;
+            }
+           
+        HasPermissionToLogIn(LogInEmailInputEl.value , LogInPassWordInputEl.value).then(function(loginRes){
+        
+        
+            if(loginRes)
+                {
+                    ResetLoginInputsBackGround(LogInEmailInputEl,LogInPassWordInputEl);
+                    hideWrongLoginInfoMsg();
+    
+                    setTimeout(()=>{
+                        GetCurrentUser(LogInEmailInputEl.value,LogInPassWordInputEl.value).then(function(currentUserRes){
+                        CurrentUser = currentUserRes;
+                        LogInEmailInputEl.value = "";
+                        LogInPassWordInputEl.value ="";
+                        location.href= "http://127.0.0.1:5500/index.html";
+                        });
+                    },3000)
+                }
+                else
+                {
+                
+                    LogInErrorMessageEl.textContent = "❌ wrong e-mail/password please try again";
+                    ShowWronLoginInfosMsg();
+    
+                    changeInputBackGround(LogInEmailInputEl);
+                    changeInputBackGround(LogInPassWordInputEl);
+    
+                }
+        });
+    
+    });
+
+}
+
 SetBirthDateLimits();
 showOpenAccountForm();
 hideOpenAccountForm();
@@ -407,13 +523,12 @@ hideOpenAccountForm();
 ValidateUserNameInput();
 ValidateEmailField();
 PerformSubmit();
+PerformLogin();
 
 
 
-/* AddNewUser(new clsUser(0,"Khaled","Bouzenka","Khalouda43","1234","Khaled@gmail.com","0650221301",new Date("1983/11/30")))
-.then(res=>console.log(res));
 
-AddNewAccount(new clsAccount(0,9, new Date("2020/1/1"))).then(res=>console.log(res)); */
+
 
 
 
