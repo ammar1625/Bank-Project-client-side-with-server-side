@@ -72,7 +72,7 @@ let FieldsEl = document.querySelectorAll(".input-field");
     }
 }
 
- let CurrentUser ;
+export let CurrentUser ;
 
 let CurrentDate = new Date();
 
