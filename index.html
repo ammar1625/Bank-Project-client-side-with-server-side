@@ -9,288 +9,120 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="icon" href="images/wise-green.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles/main-page-header.css">
-    <link rel="stylesheet" href="styles/main-page-body.css">
-    <link rel="stylesheet" href="styles/personal-infos.css">
-    <link rel="stylesheet" href="styles/close-account.css"> 
-    <script defer src="scripts/main-page.js" type="module"></script>
-    <title>home</title>
+    <script defer src="scripts/login.js"></script>
+    <title>Wise Log in</title>
 </head>
 <body>
-    <!--header section-->
+
     <div class="header">
         <img src="images/logo.png" alt="logo" class="logo">
-        <div class="welcome-msg-ctr">
-            <h1 class="welcome-msg">Welcome   <span class="user">Ammar!</span></h1>
-        </div>
-
-        <div class="current-balance-ctr">
-                
-            <h1 class="current-balance">current balance <span class="ammount">2500.00</span><span class="currency">$</span></h1>
-        </div>
     </div>
 
-    <!--body section-->
     <div class="body">
 
-        <div class="side-bar">
-            <button class="depo&withd side-btn"><img class="side-bar-icon" src="icons/depowithdraw.png"> deposit & withdraw</button>
-            <button class="transactions side-btn"><img class="side-bar-icon" src="icons/transfer.png"> transactions</button>
-            <button class="personal-infos side-btn"><img class="side-bar-icon" src="icons/personl-infos.png">personal infos</button>
-            <button class="close-acc side-btn"><img class="side-bar-icon" src="icons/close-account.png">close account</button>
-            <button class="log-out side-btn"><img class="side-bar-icon" src="icons/sign_out.png">log-out</button>
+        <div class="welcome-ctr">
+            <h1 class="welcome-label">Welcome Back</h1>
+            <p class="sign-up">New to Wise? <a href="" class="link">Sign up</a></p>
+        </div>
+
+        <div class="form-ctr">
+            <div class="email-ctr">
+              <p class="field-description">your e-mail address</p>
+              <input type="email" class="e-mail-input">
+              
             </div>
 
-            <div class="main-body ">
-                <div class="deposits-withdraws-ctr ">
-                    <div class="header-ctr">
-                        <h1 class="dep-header-title header-title"><img src="icons/depowithdraw.png" class="dep-header-img header-img">deposit & withdraw</h1>
-                    </div>
-                
-                    <div class="dep-main-ctr main-ctr">
-                        <div class="dep-left-side left-side">
-                            <div class="dep-history-ctr history-ctr">
-                                <div class="dep-history-el history-el">
-                                    <p class="movement-type">deposit</p>
-                                    <p class="movement-date">27-03-2022</p>
-                                    <p class="movement-ammount">1200.00$</p>
-                                </div>
-                          
-                            </div>
-                        </div>
-
-                        <div class="dep-right-side right-side">
-                            <div class="deposits-ctr">
-
-                                <div class="title-container">deposit</div>
-
-                                <div class="deposits-inputs-div">
-                                    <div class="deposits-ammount-div">
-                                        <input type="number" class="deposits-ammount-input">
-                                        
-                                    </div>
-                                
-                                    <button class="deposit-btn">&#10145;</button>
-                                </div>
-                                
-                            </div>
-
-                            <div class="withdraws-ctr">
-
-                                <div class="title-container">withdraw</div>
-
-                                <div class="withdraws-inputs-div">
-                                    <div class="withdraws-ammount-div">
-                                        <input type="number" class="withdraws-ammount-input">
-                                        
-                                    </div>
-                                
-                                    <button class="withdraw-btn">&#10145;</button>
-                                </div>
-                                
-                            </div>
-
-                        
-                        </div>
-                    </div>
-                </div>
-
-                <div class="transactions-ctr hidden ">
-                    <div class="header-ctr">
-                        <h1 class="tran-header-title header-title"><img src="icons/transfer.png" class="tran-header-img header-img">transactions</h1>
-                    </div>
-                
-                    <div class="tran-main-ctr main-ctr">
-                        <div class="tran-left-side left-side">
-                            <div class="tran-history-ctr history-ctr">
-                                <div class="tran-history-el history-el">
-                                    <p class="movement-type">recieved</p>
-                                    <p class="movement-date">27-03-2022</p>
-                                    <p class="movement-ammount">1200.00$</p>
-                                    <p class="source">from <span class="user">Ibra89</span> </p>
-                                </div>
-
-                                
-                          
-                            </div>
-                        </div>
-
-                        <div class="tran-right-side right-side">
-                           
-
-                          
-                            <div class="transfer-container">
-
-                                <div class="title-container">Transfere Money</div>
-    
-                                <div class="inputs-div">
-                                    <div class="destination-div">
-                                         <input type="text" class="destination-input">
-                                         <h2 class="description">Transfer to</h2>
-                                    </div>
-                                   
-                                    <div class="ammount-div">
-                                          <input type="number" class="ammount-input">
-                                         <h2 class="description">Ammount</h2>
-    
-                                    </div>
-    
-                                    <button class="send-btn">&#10145;</button>
-                                </div>
-    
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-
-                <div class="personal-infos-ctr hidden">
-                    <div class="header-ctr">
-                        <h1 class="tran-header-title header-title"><img src="icons/personl-infos.png" class="personal header-img">personal infos</h1>
-                    </div>
-                
-                    <div class="infos-ctr">
-                        <div class="info-ctr ">
-                            <p class="infos-label">First name :</p>
-                            <p class="f-name info">Ammar </p>
-                        </div>
-                        <div class="info-ctr">
-                            <p class="infos-label">Last name :</p>
-                            <p class="l-name info">bouzenka </p>
-                        </div>
-                        <div class="info-ctr">
-                            <p class="infos-label">User name :</p>
-                            <p class="user-name info">Ammar25 </p>
-                        </div>
-                        <div class="info-ctr">
-                            <p class="infos-label">e-mail :</p>
-                            <p class="e-mail info">ammarbozuenka25@gmail.com </p>
-                        </div>
-                        <div class="info-ctr">
-                            <p class="infos-label">phone number :</p>
-                            <p class="phone info">0790409726 </p>
-                        </div>
-                        <div class="info-ctr">
-                            <p class="infos-label">date of birth :</p>
-                            <p class="b-date info">16-07-1992 </p>
-                        </div>
-                    </div>
-
-                    <div class="btns-ctr">
-                        <button class="update-btn btn">update infos</button>
-                        <button class="change-password-btn btn">change password</button>
-                    </div>
-                </div>
-
-                <div class="close-account-ctr hidden">
-                    <div class="header-ctr">
-                        <h1 class="tran-header-title header-title"><img src="icons/close-account.png" class="close-acc header-img">close account</h1>
-                    </div>
-
-                    <div class="comfirm-inputs-ctr">
-                        <div class="field-ctr">
-                            <p class="txt">user name</p>
-                            <input type="text" class="comfirm-user comfirm-field">
-                        </div>
-                        <div class="field-ctr">
-                            <p class="txt">password</p>
-                            <input type="password" class="comfirm-password comfirm-field">
-                        </div>
-                    </div>
-
-                    <div class="error-ctr invisible">
-                        <h2 class="error-message">wrong user-name/password!</h2>
-                    </div>
-
-                    <div class="close-acc-btn-ctr">
-                        <button class="close-acc-btn">close account</button>
-                    </div>
-                
-
+            <div class="password-ctr">
+                <p class="field-description">your password</p>
+                <input type="password" class="password-input">
             </div>
+
+            <div class="error-ctr hidden">
+                <h2 class="error-msg ">❌ wrong e-mail/password please try again</h2>
+            </div>
+
+            <div class="login-btn-ctr">
+                <button class="log-in-btn">Log in</button>
+            </div>
+        </div>
+
+        <div class="login-options-ctr">
+            <p class="text">or Log-in with</p>
+            <div class="buttons-ctr">
+                <button class="fb btn"><img src="images/facebook.png" alt="" class="logo-img"></button>
+                <button class="google btn"><img src="images/google.png" alt="" class="logo-img"></button>
+                <button class="apple btn"><img src="images/apple.png" alt="" class="logo-img"></button>
+            </div>
+       
+        </div>
+
     </div>
+
     <div class="overlay hidden">
-     
+       
     </div>
-    <div class="open-account-model update-infos-model hidden">
-            <div class="title-ctr">
-                <h1 class="title">update infos</h1>
-            </div>
-            <div class="form">
-                <div class="field">
-                    <p class="label">first name </p>
-                    <input type="text" class="input-field f-name update-fname">
-                </div>
-
-                <div class="field">
-                    <p class="label">last name </p>
-                    <input type="text" class="input-field l-name update-lname">
-                </div>
-
-                <div class="field">
-                    <p class="label">e-mail </p>
-                    <input type="email" class="input-field e-mail update-e-mail">
-                </div>
-
-                <div class="field">
-                    <p class="label">phone number</p>
-                    <input type="tel" class="input-field phone update-phone">
-                </div>
-
-                <div class="field">
-                    <p class="label">date of birth </p>
-                    <input type="date" class="input-field birth-date update-b-date">
-                </div>
-
-                <div class="field">
-                    <p class="label">user name </p>
-                    <input type="text" class="input-field user-name update-user-name">
-                </div>
-
-            
-                <p class="empty-field-error hidden">you must fill all the fields !</p>
-                <button class="submit">submit</button>
-                
-        </div>
-        <button class="close-btn">X</button>
-    </div>
-
-    <div class="open-account-model change-password-model hidden">
+    <div class="open-account-model hidden">
         <div class="title-ctr">
-            <h1 class="title">change password</h1>
+            <h1 class="title">Create account</h1>
         </div>
-        <div class="form ">
+        <div class="form">
             <div class="field">
-                <p class="label">current password </p>
-                <input type="password" class="input-field current-password">
+                <p class="label">first name </p>
+                <input type="text" class="input-field f-name">
             </div>
+
             <div class="field">
-                <p class="label">new password </p>
-                <input type="password" class="input-field new-password">
+                <p class="label">last name </p>
+                <input type="text" class="input-field l-name">
+            </div>
+
+            <div class="field">
+                <p class="label">e-mail </p>
+                <input type="email" class="input-field e-mail">
+            </div>
+
+            <div class="field">
+                <p class="label">phone number</p>
+                <input type="number" class="input-field phone">
+            </div>
+
+            <div class="field">
+                <p class="label">date of birth </p>
+                <input type="date" class="input-field birth-date">
+            </div>
+
+            <div class="field">
+                <p class="label">user name </p>
+                <input type="text" class="input-field user-name">
+            </div>
+
+            <div class="field">
+                <p class="label">password </p>
+                <input type="password" class="input-field password">
             </div>
 
             <div class="field">
                 <p class="label">comfirm password </p>
                 <input type="password" class="input-field comfirm-password">
             </div>
-
-        
             <p class="empty-field-error hidden">you must fill all the fields !</p>
             <button class="submit">submit</button>
             
     </div>
     <button class="close-btn">X</button>
-</div>
+    </div>
 
-<div class="comfirm-msg hidden">
-    <div class="dialog">
-        <p class="message">do you want to perform this action?</p>
+    <div class="comfirm-msg hidden">
+        <div class="dialog">
+            <p class="message">do you want to perform this action?</p>
+        </div>
+        <div class="buttons">
+            <button class="button yes">yes</button>
+            <button class="button no">no</button>
+        </div>
     </div>
-    <div class="buttons">
-        <button class="button yes">yes</button>
-        <button class="button no">no</button>
-    </div>
-</div>
+    
 </body>
 </html>

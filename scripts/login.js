@@ -72,8 +72,8 @@ let FieldsEl = document.querySelectorAll(".input-field");
     }
 }
 
-export let CurrentUser ;
-
+ let CurrentUser = null ;
+export {CurrentUser};
 let CurrentDate = new Date();
 
 function showOpenAccountForm()
