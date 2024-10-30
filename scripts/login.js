@@ -2,7 +2,7 @@
 
 
 //Dom Elements
-let SignUpLinkEl = document.querySelector(".link");
+ let SignUpLinkEl = document.querySelector(".link");
 let LogInEmailInputEl = document.querySelector(".e-mail-input");
 let LogInPassWordInputEl = document.querySelector(".password-input");
 let LogInBtnEl = document.querySelector(".log-in-btn");
@@ -72,12 +72,18 @@ let FieldsEl = document.querySelectorAll(".input-field");
     }
 }
 
- let CurrentUser = null ;
+ let CurrentUser  ;
 
+ 
 
 let CurrentDate = new Date();
 
-function showOpenAccountForm()
+function saveCurrentUserToLocalStorage(User)
+{
+    localStorage.setItem("User",JSON.stringify(User));
+}
+
+ function showOpenAccountForm()
 {
     SignUpLinkEl.addEventListener("click",(e)=>{
     e.preventDefault();
@@ -495,9 +501,11 @@ function PerformLogin()
                     setTimeout(()=>{
                         GetCurrentUser(LogInEmailInputEl.value,LogInPassWordInputEl.value).then(function(currentUserRes){
                         CurrentUser = currentUserRes;
+                        saveCurrentUserToLocalStorage(CurrentUser);
                         LogInEmailInputEl.value = "";
                         LogInPassWordInputEl.value ="";
                         location.href= "http://127.0.0.1:5500/home.html";
+                       /*  window.open("http://127.0.0.1:5500/home.html","_blank"); */
                         });
                     },3000)
                 }
