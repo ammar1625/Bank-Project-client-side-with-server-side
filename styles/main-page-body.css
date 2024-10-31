@@ -37,10 +37,17 @@
     cursor: pointer;
 }
 
+.selected
+{
+    background-color: rgba(220, 236, 248, 0.644);
+}
+
 
 .side-btn:hover
 {
     background-color: rgba(240, 248, 255, 0.644);
+    
+
 }
 
 .side-bar-icon
@@ -141,8 +148,10 @@
 .movement-type
 {
     background-color: rgba(6, 146, 29, 0.733);
+    background-color: rgba(63, 57, 58, 0.904); 
     padding: 8px 15px;
     border-radius: 20px;
+    color: white;
 }
 
 
@@ -212,6 +221,12 @@
     cursor: pointer;
 }
 
+.dep-with-error-msg
+{
+   
+    color: crimson;
+    font-size: 18px;
+}
 
 /*withdraws ctr*/
 
@@ -338,6 +353,15 @@
     margin-top: 10px;
 }
 
+
+.transfer-error-msg
+{
+    position: relative;
+    top: 60px;
+    left: -10px;
+    color: crimson;
+    font-size: 18px;
+}
 .hidden
 {
     display: none;

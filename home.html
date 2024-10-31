@@ -35,7 +35,7 @@
     <div class="body">
 
         <div class="side-bar">
-            <button class="depo&withd side-btn"><img class="side-bar-icon" src="icons/depowithdraw.png"> deposit & withdraw</button>
+            <button class="depo-withd side-btn"><img class="side-bar-icon" src="icons/depowithdraw.png"> deposit & withdraw</button>
             <button class="transactions side-btn"><img class="side-bar-icon" src="icons/transfer.png"> transactions</button>
             <button class="personal-infos side-btn"><img class="side-bar-icon" src="icons/personl-infos.png">personal infos</button>
             <button class="close-acc side-btn"><img class="side-bar-icon" src="icons/close-account.png">close account</button>
@@ -51,11 +51,11 @@
                     <div class="dep-main-ctr main-ctr">
                         <div class="dep-left-side left-side">
                             <div class="dep-history-ctr history-ctr">
-                                <div class="dep-history-el history-el">
+                                <!-- <div class="dep-history-el history-el">
                                     <p class="movement-type">deposit</p>
                                     <p class="movement-date">27-03-2022</p>
                                     <p class="movement-ammount">1200.00$</p>
-                                </div>
+                                </div> -->
                           
                             </div>
                         </div>
@@ -67,7 +67,7 @@
 
                                 <div class="deposits-inputs-div">
                                     <div class="deposits-ammount-div">
-                                        <input type="number" class="deposits-ammount-input">
+                                        <input type="number" class="deposits-ammount-input" min="1">
                                         
                                     </div>
                                 
@@ -82,7 +82,7 @@
 
                                 <div class="withdraws-inputs-div">
                                     <div class="withdraws-ammount-div">
-                                        <input type="number" class="withdraws-ammount-input">
+                                        <input type="number" class="withdraws-ammount-input"  min="1">
                                         
                                     </div>
                                 
@@ -91,6 +91,7 @@
                                 
                             </div>
 
+                            <h3 class="dep-with-error-msg msg hidden">ammount invalid</h1>
                         
                         </div>
                     </div>
@@ -131,15 +132,16 @@
                                     </div>
                                    
                                     <div class="ammount-div">
-                                          <input type="number" class="ammount-input">
+                                          <input type="number" class="ammount-input"  min="1">
                                          <h2 class="description">Ammount</h2>
     
                                     </div>
     
                                     <button class="send-btn">&#10145;</button>
                                 </div>
-    
+                                <h3 class="transfer-error-msg msg hidden">ammount invalid</h1>
                             </div>
+                           
                         
                         </div>
                     </div>
