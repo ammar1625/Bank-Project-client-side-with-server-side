@@ -39,8 +39,23 @@ body
     word-spacing: 10px;
 }
 
-.user,.ammount,.currency
+
+
+.user
 {
     color: rgb(53, 52, 52);
+}
+
+.ammount,.currency
+{
+    color: rgb(250, 248, 245);
+}
+
+.current-balance-ctr
+{
+    
+    padding: 20px 35px;
+    background-color: rgba(51, 53, 65, 0.603);
+    border-radius: 15px;
 }
 

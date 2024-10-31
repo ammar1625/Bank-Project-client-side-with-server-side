@@ -78,9 +78,9 @@ let FieldsEl = document.querySelectorAll(".input-field");
 
 let CurrentDate = new Date();
 
-function saveCurrentUserToLocalStorage(User)
+function saveToLocalStorage(key, value)
 {
-    localStorage.setItem("User",JSON.stringify(User));
+    localStorage.setItem(key,JSON.stringify(value));
 }
 
  function showOpenAccountForm()
@@ -357,7 +357,7 @@ function PerformSubmit()
                 resetInputBackGround();
                 hideErrorMessage();
                 let User  = new clsUser(0 , FirstNameInputEl.value , LastNameInputEl.value, UserNameInPutEl.value,
-                   PassWordInPutEl.value , ComfirmPassWordInPutEl.value , PhoneInputEl.value , BirthDateInPutEl.value) 
+                   PassWordInPutEl.value , SignUpEmailInputEl.value , PhoneInputEl.value , BirthDateInPutEl.value) 
                 if(ComfirmPassWordInPutEl.value != PassWordInPutEl.value)
                     {
                         ShowErrorMessage("Wrong Comfirmed password");
@@ -501,7 +501,7 @@ function PerformLogin()
                     setTimeout(()=>{
                         GetCurrentUser(LogInEmailInputEl.value,LogInPassWordInputEl.value).then(function(currentUserRes){
                         CurrentUser = currentUserRes;
-                        saveCurrentUserToLocalStorage(CurrentUser);
+                        saveToLocalStorage("User", CurrentUser);
                         LogInEmailInputEl.value = "";
                         LogInPassWordInputEl.value ="";
                         location.href= "http://127.0.0.1:5500/home.html";
