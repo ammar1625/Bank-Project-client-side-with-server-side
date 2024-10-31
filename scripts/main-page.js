@@ -31,6 +31,42 @@ let depMovementTypeEl = document.querySelector(".movement-type");
 let depMovementDateEl = document.querySelector(".movement-date");
 let depMovementAmmountEl = document.querySelector(".movement-ammount");
 
+let depositInputEl = document.querySelector(".deposits-ammount-input");
+let withdrawInputEl = document.querySelector(".withdraws-ammount-input");
+let depositBtnEl = document.querySelector(".deposit-btn");
+let withdrawBtnEl = document.querySelector(".withdraw-btn");
+let depoWithErrorMsgEl = document.querySelector(".dep-with-error-msg");
+
+let messageBoxEl = document.querySelector(".comfirm-msg");
+let yesBtnEl = document.querySelector(".yes");
+let noBtnEl = document.querySelector(".no");
+let messageBoxMsgEl = document.querySelector(".message");
+let overlayEl = document.querySelector(".overlay");
+
+
+
+
+
+let timeOutId ;
+let hasShow = false;
+
+ class clsTransaction
+{
+      TransactionId 
+      FromAccountId 
+      ToAccountId 
+      TransactionAmmount 
+      TransactionDate 
+     constructor( TransactionId ,  FromAccountId ,  ToAccountId ,  TransactionAmmount, TransactionDate) 
+        {
+            this.TransactionId = TransactionId;
+            this.FromAccountId = FromAccountId;
+            this.ToAccountId = ToAccountId;
+            this.TransactionAmmount = TransactionAmmount;
+            this.TransactionDate = TransactionDate;
+        }
+}
+
 function renderDepositsAndWithdrawsRecords()
 {
     let html = "";
@@ -48,7 +84,7 @@ function renderDepositsAndWithdrawsRecords()
                                 </div>
                 `;
              
-                depositsAndWithdrawsHistoryContainerEl.insertAdjacentHTML("beforeend",html);
+                depositsAndWithdrawsHistoryContainerEl.insertAdjacentHTML("afterbegin",html);
                
             }
 
@@ -110,7 +146,9 @@ function formatMoney(ammount)
 
 function formatDate(date)
 {
-    return date.replace("T"," / ").slice(0,-3);
+    return  date.replace("T"," / ").slice(0,-3).padEnd(21,"0");
+   
+    
 }
 
 function updateBalance()
@@ -147,12 +185,12 @@ function markTabSelected()
 
 }
 
-function displaySection(section)
+function displayElement(section)
 {
     section.classList.remove("hidden");
 }
 
-function hideSection(section)
+function hideElement(section)
 {
     section.classList.add("hidden");
 }
@@ -160,38 +198,38 @@ function hideSection(section)
 function navigateThroughSections()
 {
     depoAndWithdrawEl.addEventListener("click",()=>{
-        displaySection(depositWithdrawSectionEl);
+        displayElement(depositWithdrawSectionEl);
 
-        hideSection(transactionsSectionsEl);
-        hideSection(personalInfosSectionEl);
-        hideSection(closeAccountSectionEl);
+        hideElement(transactionsSectionsEl);
+        hideElement(personalInfosSectionEl);
+        hideElement(closeAccountSectionEl);
 
     });
 
     transactionsEl.addEventListener("click",()=>{
-        displaySection(transactionsSectionsEl);
+        displayElement(transactionsSectionsEl);
 
-        hideSection(depositWithdrawSectionEl);
-        hideSection(personalInfosSectionEl);
-        hideSection(closeAccountSectionEl);
+        hideElement(depositWithdrawSectionEl);
+        hideElement(personalInfosSectionEl);
+        hideElement(closeAccountSectionEl);
 
     });
 
     personalInfosEl.addEventListener("click",()=>{
-        displaySection(personalInfosSectionEl);
+        displayElement(personalInfosSectionEl);
 
-        hideSection(transactionsSectionsEl);
-        hideSection(depositWithdrawSectionEl);
-        hideSection(closeAccountSectionEl);
+        hideElement(transactionsSectionsEl);
+        hideElement(depositWithdrawSectionEl);
+        hideElement(closeAccountSectionEl);
 
     });
 
     closeAccoutEl.addEventListener("click",()=>{
-        displaySection(closeAccountSectionEl);
+        displayElement(closeAccountSectionEl);
 
-        hideSection(transactionsSectionsEl);
-        hideSection(personalInfosSectionEl);
-        hideSection(depositWithdrawSectionEl);
+        hideElement(transactionsSectionsEl);
+        hideElement(personalInfosSectionEl);
+        hideElement(depositWithdrawSectionEl);
 
     });
 }
@@ -219,13 +257,170 @@ async function getDepositsAndWithdrawsList(accountId)
     return null;
 }
 
+async function AddNewTransaction(transfer)
+{
+    try
+    {
+        let transResponse = await fetch(`http://localhost:5104/api/Transactions`,
+            {
+                method : "post",
+                headers : {
+                    'Content-type':'application/json'
+                },
+                body: JSON.stringify(transfer)
+            }
+        );
+
+        if(!transResponse.ok)
+            {
+                throw new Error(`${transResponse.statusText}`)
+            }
+        
+        let data =await transResponse.json();
+
+        return data;
+    }
+    catch(err)
+    {
+
+    }
+    return null;
+}
+
+function setError(errorMsg ,message)
+{
+    errorMsg.textContent = message;
+}
+
+function hideErrorMessage(errorMsg )
+{
+    if(hasShow)
+        {
+            clearTimeout(timeOutId);
+            hasShow = false;
+        }
+   timeOutId =  setTimeout(function(){
+        errorMsg.classList.add("hidden");
+        hasShow = true;
+    },3000);
+}
+
+function clearInput(input)
+{
+    input.value = "";
+}
+
+function performDeposit()
+{
+    depositBtnEl.addEventListener("click",()=>{
+        if(!depositInputEl.value)
+            {
+                return;
+            }
+        if(depositInputEl.value <=0)
+            {
+                displayElement(depoWithErrorMsgEl);
+                setError(depoWithErrorMsgEl,"Ammount should be greater than 0 $");
+                hideErrorMessage(depoWithErrorMsgEl);
+            }
+        else
+        {
+            displayElement(overlayEl);
+            displayElement(messageBoxEl);
+    
+            yesBtnEl.addEventListener("click",()=>{
+                AddNewTransaction(new clsTransaction(0,null,currentAccount.accountId,Number.parseFloat(depositInputEl.value),new Date("2020-01-01"))).
+                then(function(res){
+                    //
+                });
+                messageBoxMsgEl.textContent = `${depositInputEl.value} $ has been deposited successfully to your account`;
+                
+                setTimeout(()=>{
+                    hideElement(overlayEl);
+                    hideElement(messageBoxEl);
+                    renderDepositsAndWithdrawsRecords();
+                    updateBalance();
+                },3000);
+                
+                clearInput(depositInputEl);
+            });
+    
+            noBtnEl.addEventListener("click",()=>{
+                hideElement(overlayEl);
+                hideElement(messageBoxEl);
+            });
+           
+        }
+    
+        messageBoxMsgEl.textContent = "do you want to perform this action?";
+    });
+}
+
+
+function performWithdraw()
+{
+  
+    withdrawBtnEl.addEventListener("click",()=>{
+       
+        //if not value inputed
+        if(!withdrawInputEl.value)
+            {
+                return;
+            }
+            //if less or equal 0 value is inputed
+       else if(Number.parseFloat(withdrawInputEl.value) <=0)
+            {
+                displayElement(depoWithErrorMsgEl);
+                setError(depoWithErrorMsgEl,"Ammount should be greater than 0 $");
+                hideErrorMessage(depoWithErrorMsgEl);
+            }
+            //if you try to withdraw ammount which is greater than the actual balance 
+       else if (Number.parseFloat(balanceEl.textContent)< Number.parseFloat(withdrawInputEl.value))
+        {
+            displayElement(depoWithErrorMsgEl);
+            setError(depoWithErrorMsgEl,"the requested Ammount is greater than your actual balance!");
+            hideErrorMessage(depoWithErrorMsgEl);
+        }
+        //else you can procede to continue the process
+        else
+        {
+            displayElement(overlayEl);
+            displayElement(messageBoxEl);
+    
+            yesBtnEl.addEventListener("click",()=>{
+                AddNewTransaction(new clsTransaction(0,currentAccount.accountId,null,Number.parseFloat(withdrawInputEl.value),new Date("2020-01-01"))).
+                then(function(res){
+                    //
+                });
+                messageBoxMsgEl.textContent = `${withdrawInputEl.value} $ has been withdrew successfully from your account`;
+                
+                setTimeout(()=>{
+                    hideElement(overlayEl);
+                    hideElement(messageBoxEl);
+                    renderDepositsAndWithdrawsRecords();
+                    updateBalance();
+                },3000);
+                
+                clearInput(withdrawInputEl);
+            });
+    
+            noBtnEl.addEventListener("click",()=>{
+                hideElement(overlayEl);
+                hideElement(messageBoxEl);
+            });
+           
+        }
+    
+        messageBoxMsgEl.textContent = "do you want to perform this action?";
+    });
+}
+
 loadHeadersData();
 markTabSelected();
 navigateThroughSections();
 renderDepositsAndWithdrawsRecords();
-/* let trans = await getDepositsAndWithdrawsList(currentAccount.accountId);
+performDeposit();
+performWithdraw();
 
-for(let tra of trans)
-    {
-        console.log(tra);
-    } */
+
+/* AddNewTransaction(new clsTransaction(0,100,null,120,new Date("2020-01-01"))).then((res)=>console.log(res)); */
