@@ -352,7 +352,7 @@ function performDeposit()
                     hideElement(messageBoxEl);
                     renderDepositsAndWithdrawsRecords();
                     updateBalance();
-                    
+                    clearInput(depositInputEl);
                 },3000);
                 
                 
@@ -361,8 +361,9 @@ function performDeposit()
             noBtnEl.addEventListener("click",()=>{
                 hideElement(overlayEl);
                 hideElement(messageBoxEl);
+                clearInput(depositInputEl);
             });
-            clearInput(depositInputEl);
+            
         }
     
         messageBoxMsgEl.textContent = "do you want to perform this action?";
@@ -416,6 +417,8 @@ function performWithdraw()
                     hideElement(messageBoxEl);
                     renderDepositsAndWithdrawsRecords();
                     updateBalance();
+                    clearInput(withdrawInputEl);
+
                 },3000);
                 
                 
@@ -424,8 +427,9 @@ function performWithdraw()
             noBtnEl.addEventListener("click",()=>{
                 hideElement(overlayEl);
                 hideElement(messageBoxEl);
+                clearInput(withdrawInputEl);
+
             });
-            clearInput(withdrawInputEl);
            
         }
     
