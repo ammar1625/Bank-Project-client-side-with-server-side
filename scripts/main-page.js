@@ -67,6 +67,16 @@ let hasShow = false;
         }
 }
 
+function performVisualEffect()
+{
+    
+    setTimeout(()=>{
+        hideElement(overlayEl);
+    },2000);
+    
+}
+
+
 function renderDepositsAndWithdrawsRecords()
 {
     let html = "";
@@ -289,6 +299,7 @@ async function AddNewTransaction(transfer)
 
 function setError(errorMsg ,message)
 {
+    errorMsg.classList.remove("invisible");
     errorMsg.textContent = message;
 }
 
@@ -300,7 +311,7 @@ function hideErrorMessage(errorMsg )
             hasShow = false;
         }
    timeOutId =  setTimeout(function(){
-        errorMsg.classList.add("hidden");
+        errorMsg.classList.add("invisible");
         hasShow = true;
     },3000);
 }
@@ -319,9 +330,10 @@ function performDeposit()
             }
         if(depositInputEl.value <=0)
             {
-                displayElement(depoWithErrorMsgEl);
+                //displayElement(depoWithErrorMsgEl);
                 setError(depoWithErrorMsgEl,"Ammount should be greater than 0 $");
                 hideErrorMessage(depoWithErrorMsgEl);
+                clearInput(depositInputEl)
             }
         else
         {
@@ -340,19 +352,22 @@ function performDeposit()
                     hideElement(messageBoxEl);
                     renderDepositsAndWithdrawsRecords();
                     updateBalance();
+                    
                 },3000);
                 
-                clearInput(depositInputEl);
+                
             });
     
             noBtnEl.addEventListener("click",()=>{
                 hideElement(overlayEl);
                 hideElement(messageBoxEl);
             });
-           
+            clearInput(depositInputEl);
         }
     
         messageBoxMsgEl.textContent = "do you want to perform this action?";
+       // clearInput(depositInputEl);
+
     });
 }
 
@@ -370,16 +385,18 @@ function performWithdraw()
             //if less or equal 0 value is inputed
        else if(Number.parseFloat(withdrawInputEl.value) <=0)
             {
-                displayElement(depoWithErrorMsgEl);
+                //displayElement(depoWithErrorMsgEl);
                 setError(depoWithErrorMsgEl,"Ammount should be greater than 0 $");
                 hideErrorMessage(depoWithErrorMsgEl);
+                clearInput(withdrawInputEl);
             }
             //if you try to withdraw ammount which is greater than the actual balance 
        else if (Number.parseFloat(balanceEl.textContent)< Number.parseFloat(withdrawInputEl.value))
         {
-            displayElement(depoWithErrorMsgEl);
+            //displayElement(depoWithErrorMsgEl);
             setError(depoWithErrorMsgEl,"the requested Ammount is greater than your actual balance!");
             hideErrorMessage(depoWithErrorMsgEl);
+            clearInput(withdrawInputEl);
         }
         //else you can procede to continue the process
         else
@@ -401,20 +418,23 @@ function performWithdraw()
                     updateBalance();
                 },3000);
                 
-                clearInput(withdrawInputEl);
+                
             });
     
             noBtnEl.addEventListener("click",()=>{
                 hideElement(overlayEl);
                 hideElement(messageBoxEl);
             });
+            clearInput(withdrawInputEl);
            
         }
     
         messageBoxMsgEl.textContent = "do you want to perform this action?";
+        //clearInput(withdrawInputEl);
+
     });
 }
-
+performVisualEffect();
 loadHeadersData();
 markTabSelected();
 navigateThroughSections();
