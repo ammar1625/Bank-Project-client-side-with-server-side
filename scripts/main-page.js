@@ -42,6 +42,21 @@ let depoWithErrorMsgEl = document.querySelector(".dep-with-error-msg");
 let messageBoxEl = document.querySelector(".comfirm-msg");
 let yesBtnEl = document.querySelector(".yes");
 let noBtnEl = document.querySelector(".no");
+
+//let depoYesBtnEl = document.querySelector(".d-yes");
+let withdYesBtnEl = document.querySelector(".w-yes");
+//let depoNoBtnEl = document.querySelector(".d-no");
+let withdNoBtnEl = document.querySelector(".w-no");
+let tranYesBtnEl = document.querySelector(".t-yes");
+let tranNoBtnEl = document.querySelector(".t-no"); 
+let withdrawMessageBoxEl = document.querySelector(".withd-comfirm-msg");
+let withdrawMessageBoxMsgEl = document.querySelector(".w-message");
+
+let transferMessageBoxEl = document.querySelector(".trans-comfirm-msg");
+let transMessageBoxMsgEl = document.querySelector('.t-message');
+let transferErrorMsgEl = document.querySelector(".transfer-error-msg");
+
+
 let messageBoxMsgEl = document.querySelector(".message");
 let overlayEl = document.querySelector(".overlay");
 
@@ -49,10 +64,14 @@ let overlayEl = document.querySelector(".overlay");
 /*transactions dom elements*/
 
 let TransactionsHistoryCtrEl = document.querySelector(".tran-history-ctr");
+let destinationUserInptEl = document.querySelector(".destination-input");
+let transferAmmountInputEl = document.querySelector(".ammount-input");
+let sendBtnEl = document.querySelector(".send-btn");
 
 
 let timeOutId;
 let hasShow = false;
+let destinationAccountId = 0;
 
 class clsTransaction {
   TransactionId;
@@ -305,6 +324,7 @@ function performDeposit() {
 function comfirmdeposit()
 {
    yesBtnEl.addEventListener("click", () => {
+                   
                    AddNewTransaction(
                    new clsTransaction(
                        0,
@@ -314,7 +334,7 @@ function comfirmdeposit()
                        new Date("2020-01-01")
                    )
                    ).then(function (res) {
-                       console.log(res);
+                     
                    
                    });
            messageBoxMsgEl.textContent = `${depositInputEl.value} $ has been deposited successfully to your account`;
@@ -364,7 +384,7 @@ function performWithdraw() {
     //else you can procede to continue the process
     else {
       displayElement(overlayEl);
-      displayElement(messageBoxEl);
+      displayElement(withdrawMessageBoxEl);
     }
 
     messageBoxMsgEl.textContent = "do you want to perform this action?";
@@ -374,7 +394,9 @@ function performWithdraw() {
 
 function comfirmWithdraw()
 {
-  yesBtnEl.addEventListener("click", () => {
+
+  withdYesBtnEl.addEventListener("click", () => {
+    
     AddNewTransaction(
       new clsTransaction(
         0,
@@ -384,22 +406,22 @@ function comfirmWithdraw()
         new Date("2020-01-01")
       )
     ).then(function (res) {
-      console.log(res);
+     
     });
-    messageBoxMsgEl.textContent = `${withdrawInputEl.value} $ has been withdrew successfully from your account`;
+    withdrawMessageBoxMsgEl.textContent = `${withdrawInputEl.value} $ has been withdrew successfully from your account`;
 
     setTimeout(() => {
       hideElement(overlayEl);
-      hideElement(messageBoxEl);
+      hideElement(withdrawMessageBoxEl);
       renderDepositsAndWithdrawsRecords();
       updateBalance();
       clearInput(withdrawInputEl);
     }, 3000);
   });
 
-  noBtnEl.addEventListener("click", () => {
+  withdNoBtnEl.addEventListener("click", () => {
     hideElement(overlayEl);
-    hideElement(messageBoxEl);
+    hideElement(withdrawMessageBoxEl);
     clearInput(withdrawInputEl);
   });
 }
@@ -472,6 +494,92 @@ function renderTransfersList()
     });
 }
 
+function performTransfer()
+{
+  sendBtnEl.addEventListener("click",()=>{
+      if(!destinationUserInptEl.value && !transferAmmountInputEl.value)
+        {
+          return;
+        }
+        else if(!destinationUserInptEl.value)
+          {
+              setError(transferErrorMsgEl, "you should enter the destination user name");
+              hideErrorMessage(transferErrorMsgEl);
+          return;
+
+          }
+          else if(! transferAmmountInputEl.value)
+            {
+              setError(transferErrorMsgEl, "you should enter the value you want to send");
+              hideErrorMessage(transferErrorMsgEl);
+          return;
+
+            }
+
+       else if(Number.parseFloat(transferAmmountInputEl.value)> Number.parseFloat(balanceEl.textContent))
+          {
+            setError(transferErrorMsgEl, "the ammount you entered exeeded your current balance");
+            hideErrorMessage(transferErrorMsgEl);
+          return;
+
+          }
+
+          let destinationUser;
+
+          GetUserByUserName(destinationUserInptEl.value).then(function(user){
+              destinationUser = user;
+             
+              if(destinationUser == null)
+                {
+                  setError(transferErrorMsgEl, "the user name you have entered is not found");
+                  hideErrorMessage(transferErrorMsgEl);
+                  
+                }
+                else
+                {
+                  getAccountByUserId(destinationUser.userId).then(function(acc){
+                    destinationAccountId = acc.accountId;
+                  });
+                  displayElement(overlayEl);
+                  displayElement(transferMessageBoxEl);
+                }
+          })
+          
+         
+       
+  });
+}
+
+function comfirmTransfer()
+{
+   tranYesBtnEl.addEventListener("click",()=>{
+      AddNewTransaction(new clsTransaction(0,currentAccount.accountId, destinationAccountId ,
+         Number.parseFloat(transferAmmountInputEl.value), new Date("2020-01-01"))).then(function(res){
+
+         });
+
+         transMessageBoxMsgEl.textContent =  `${transferAmmountInputEl.value} $ has been transfered successfully`;
+
+         setTimeout(()=>{
+            updateBalance();
+            renderTransfersList();
+            hideElement(overlayEl);
+            hideElement(transferMessageBoxEl);
+            clearInput(transferAmmountInputEl);
+            clearInput(destinationUserInptEl);
+         },3000);
+   });
+
+   tranNoBtnEl.addEventListener("click",()=>{
+    hideElement(overlayEl);
+    hideElement(transferMessageBoxEl);
+    transMessageBoxMsgEl.textContent =  `do you want to perform this action?`;
+    clearInput(transferAmmountInputEl);
+    clearInput(destinationUserInptEl);
+   });
+
+}
+
 performVisualEffect();
 loadHeadersData();
 markTabSelected();
@@ -483,6 +591,8 @@ performWithdraw();
 comfirmdeposit();
 comfirmWithdraw();
 
+performTransfer();
+comfirmTransfer();
  //AddNewTransaction(new clsTransaction(0,100,null,140,new Date("2020-01-01"))).then((res)=>console.log(res)); 
 
 
