@@ -133,7 +133,7 @@
 
 .history-el
 {
-    width: 100%;
+    width: 97%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -143,6 +143,7 @@
     font-weight: 500;
     color: rgb(26, 25, 25);
     border-bottom: 3px solid white;
+    margin-left: 10px;
 }
 
 .movement-type
@@ -152,6 +153,8 @@
     padding: 8px 15px;
     border-radius: 20px;
     color: white;
+    width: 93px;
+    text-align: center;
 }
 
 
@@ -365,4 +368,9 @@
 .hidden
 {
     display: none;
+}
+
+.source
+{
+    width: 120px;
 }
