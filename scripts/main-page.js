@@ -505,14 +505,14 @@ function performTransfer()
           {
               setError(transferErrorMsgEl, "you should enter the destination user name");
               hideErrorMessage(transferErrorMsgEl);
-          return;
+          //return;
 
           }
           else if(! transferAmmountInputEl.value)
             {
               setError(transferErrorMsgEl, "you should enter the value you want to send");
               hideErrorMessage(transferErrorMsgEl);
-          return;
+          //return;
 
             }
 
@@ -520,30 +520,33 @@ function performTransfer()
           {
             setError(transferErrorMsgEl, "the ammount you entered exeeded your current balance");
             hideErrorMessage(transferErrorMsgEl);
-          return;
+          //return;
 
           }
+          else
+          {
+             let destinationUser;
 
-          let destinationUser;
-
-          GetUserByUserName(destinationUserInptEl.value).then(function(user){
-              destinationUser = user;
-             
-              if(destinationUser == null)
-                {
-                  setError(transferErrorMsgEl, "the user name you have entered is not found");
-                  hideErrorMessage(transferErrorMsgEl);
-                  
-                }
-                else
-                {
-                  getAccountByUserId(destinationUser.userId).then(function(acc){
-                    destinationAccountId = acc.accountId;
-                  });
-                  displayElement(overlayEl);
-                  displayElement(transferMessageBoxEl);
-                }
-          })
+            GetUserByUserName(destinationUserInptEl.value).then(function(user){
+                destinationUser = user;
+              
+                if(destinationUser == null)
+                  {
+                    setError(transferErrorMsgEl, "the user name you have entered is not found");
+                    hideErrorMessage(transferErrorMsgEl);
+                    
+                  }
+                  else
+                  {
+                    getAccountByUserId(destinationUser.userId).then(function(acc){
+                      destinationAccountId = acc.accountId;
+                    });
+                    displayElement(overlayEl);
+                    displayElement(transferMessageBoxEl);
+                  }
+            });
+          }
+         
           
          
        
