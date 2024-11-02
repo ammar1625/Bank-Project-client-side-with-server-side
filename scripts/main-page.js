@@ -91,10 +91,10 @@ let updateBirthDateInputEl = document.querySelector(".update-b-date");
 let updateUserNameInputEl = document.querySelector(".update-user-name");
 let updateSubmitBtnEl = document.querySelector(".submit");
 
-let currentPassWordInputEl = document.querySelector(".current-password");
+/* let currentPassWordInputEl = document.querySelector(".current-password");
 let newPassWordInputEl = document.querySelector(".new-password");
 let comfirmPassWordInputEl = document.querySelector(".change-password-comfirm-password");
-let changePasswordSubmitBtnEl = document.querySelector(".change-password-submit-btn");
+let changePasswordSubmitBtnEl = document.querySelector(".change-password-submit-btn"); */
 
 let updateFields = document.querySelectorAll(".update-input");
 
@@ -107,11 +107,29 @@ let updateUserMessageBoxMsgEl = document.querySelector(".u-message");
 let updateUserYesBtnEl = document.querySelector(".u-yes");
 let updateUserNoBtnEl = document.querySelector(".u-no");
 
-/* console.log(updateFirstNameInputEl);*/
-/* console.log(updateUnserMessageBoxEl);
-console.log(updateUnserMessageBoxMsgEl);
-console.log(updateUnserYesBtnEl);
-console.log(updateUnserNoBtnEl); */
+
+let currentPassWordInputEl = document.querySelector(".current-password");
+let newPassWordInputEl = document.querySelector(".new-password");
+let changeComfirmPassWordInputEl = document.querySelector(".change-password-comfirm-password");
+let changePassWordErrorMsgEl = document.querySelector(".change-password-error-msg");
+let changePassWordSubmitBtnEl = document.querySelector(".change-password-submit-btn");
+let changePassWordMessageBoxEl = document.querySelector(".change-comfirm-msg");
+let changePassWordMessageBoxMsgEl = document.querySelector(".c-message");
+let changePassWordYesBtnEl = document.querySelector(".c-yes");
+let changePassWordNoBtnEl = document.querySelector(".c-no");
+
+let changeFieldsEl  =document.querySelectorAll(".change-input");
+
+/*  console.log(currentPassWordInputEl);
+ console.log(newPassWordInputEl);
+console.log(changeComfirmPassWordInputEl);
+console.log(changePassWordErrorMsgEl);
+console.log(changePassWordSubmitBtnEl); 
+console.log(changePassWordMessageBoxEl); 
+console.log(changePassWordMessageBoxMsgEl); 
+console.log(changePassWordYesBtnEl); 
+console.log(changePassWordNoBtnEl); 
+console.log(changeFieldsEl);  */
 
 
 
@@ -732,10 +750,10 @@ async function IsEmailExists(email)
     return null;
 }
 
-function CheckFieldsEmpty()
+function CheckFieldsEmpty(fields)
 {
     let isEmpty = false;
-    updateFields.forEach((field)=>{
+    fields.forEach((field)=>{
        if(!field.value)
         {
             changeInputBackGround(field);
@@ -747,9 +765,9 @@ function CheckFieldsEmpty()
         return isEmpty;
 }
 
-function resetInputsBackGroundColor()
+function resetInputsBackGroundColor(fields)
 {
-  updateFields.forEach((field)=>{
+  fields.forEach((field)=>{
         if(field.value)
          {
             field.style.backgroundColor = "aliceblue"; 
@@ -907,16 +925,16 @@ function performUserInfosUpdate()
 {
 
   updateSubmitBtnEl.addEventListener("click",()=>{
-      if(CheckFieldsEmpty())
+      if(CheckFieldsEmpty(updateFields))
         {
           setError(updateInfosErrorMsgEl,"you must fill all the fields above");
-          resetInputsBackGroundColor();
+          resetInputsBackGroundColor(updateFields);
           hideErrorMessage(updateInfosErrorMsgEl);
         
         }
         else
         {
-          resetInputsBackGroundColor();
+          resetInputsBackGroundColor(updateFields);
           displayElement(overlayEl);
           displayElement(updateUserMessageBoxEl);
         
@@ -954,6 +972,97 @@ function comfirmInfosUpdate()
 
 }
 
+async function changePassWord(userId, newPassWord)
+{
+    try
+    {
+        let response = await fetch(`http://localhost:5104/api/Users/${userId},${newPassWord}`,
+          {
+            method:"PUT",
+            headers : {
+              'content-type':'application/json'
+            },
+          }
+        );
+
+        if(!response.ok)
+          {
+            throw new Error(`${response.statusText}`);
+          }
+
+        let data = response.json();
+        return data;
+    }
+    catch(err)
+    {
+
+    }
+    return null;
+}
+
+function performPassWordChange()
+{
+    changePassWordSubmitBtnEl.addEventListener("click",()=>{
+        if(CheckFieldsEmpty(changeFieldsEl))
+          {
+             setError(changePassWordErrorMsgEl,"you must fill all the fields above!");
+             hideErrorMessage(changePassWordErrorMsgEl);
+          }
+          else
+          {
+            console.log(currentUser.password,currentPassWordInputEl.value );
+             if(currentPassWordInputEl.value != currentUser.password)
+              {
+                  setError(changePassWordErrorMsgEl,"wrong password ! try again");
+                  hideErrorMessage(changePassWordErrorMsgEl);
+                  changeInputBackGround(currentPassWordInputEl);
+                  changeInputValueColor(currentPassWordInputEl);
+              }
+              else if(changeComfirmPassWordInputEl.value != newPassWordInputEl.value)
+                {
+                  setError(changePassWordErrorMsgEl,"wrong comfirmed password ! try agin");
+                  hideErrorMessage(changePassWordErrorMsgEl);
+                  changeInputBackGround(newPassWordInputEl);
+                  changeInputBackGround(changeComfirmPassWordInputEl);
+                  changeInputValueColor(newPassWordInputEl);
+                  changeInputValueColor(changeComfirmPassWordInputEl);
+                }
+                else
+                {
+                  resetInputsBackGroundColor(changeFieldsEl)
+                  displayElement(changePassWordMessageBoxEl);
+                }
+             
+          }
+    });
+}
+
+
+function comfirmPasswordChange()
+{
+  changePassWordYesBtnEl.addEventListener('click',()=>{
+
+    changePassWord(currentUser.userId , newPassWordInputEl.value).then(function(res){
+        currentUser = res;
+        changePassWordMessageBoxMsgEl.textContent = 'your password has been changed successfully';
+    });
+
+    setTimeout(()=>{
+
+      hideElement(overlayEl);
+      hideElement(changePassWordFormEl);
+      hideElement(changePassWordMessageBoxEl);
+      clearFields(changeFieldsEl);
+      changePassWordMessageBoxMsgEl.textContent = 'do you want to comfirm?';
+
+    },2500);
+    
+  });
+
+  changePassWordNoBtnEl.addEventListener('click',()=>{
+    hideElement(changePassWordMessageBoxEl);
+  });
+}
 
 performVisualEffect();
 loadHeadersData();
@@ -973,34 +1082,14 @@ comfirmTransfer();
 
 ValidateEmailField();
 ValidateUserNameInput();
+//for update user operation
 validateAllFields(updateFields);
+//for change password operation
+validateAllFields(changeFieldsEl);
 
 performUserInfosUpdate();
 comfirmInfosUpdate();
   
-//updateUserInfos(16 , new clsUser(0,"aziza","boulatrous","azzouza" , "1234","azziza@gmail.com","0560221478",new Date("2020-12-12"))).then(res=>console.log(res));
+performPassWordChange();
+comfirmPasswordChange();
 
-/* updateUserYesBtnEl.addEventListener("click",()=>{
-  updateUserInfos(currentUser.userId , new clsUser(0,updateFirstNameInputEl.value , updateLastNameInputEl.value,
-    updateUserNameInputEl.value , "**",updateEmailInputEl.value, updatePhoneInputEl.value, 
-    updateBirthDateInputEl.value
-  )).then(function(res){
-      currentUser  =res;
-  });
-    updateUserMessageBoxMsgEl.textContent = "your infos have been updated successfully";
-  setTimeout(()=>{
-      hideElement(updateInfosFormEl);
-      hideElement(overlayEl);
-      hideElement(updateUserMessageBoxEl);
-      clearFields(updateFields);
-      renderPersonalInfos();
-      loadHeadersData();
-  },3000)
-});
-
-updateUserNoBtnEl.addEventListener("click",()=>{
-  hideElement(overlayEl);
-  hideElement(updateUserMessageBoxEl);
-  //clearFields(updateFields);
-  updateUserMessageBoxMsgEl.textContent = "do you want to submit changes?";
-}); */
