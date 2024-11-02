@@ -142,6 +142,8 @@ function resetInputBackGround()
    
 
 }
+
+
 function CheckFieldsEmpty()
 {
     let isEmpty = false;

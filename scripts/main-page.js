@@ -68,6 +68,53 @@ let destinationUserInptEl = document.querySelector(".destination-input");
 let transferAmmountInputEl = document.querySelector(".ammount-input");
 let sendBtnEl = document.querySelector(".send-btn");
 
+/*personal infos dom*/
+let firstNameLblEl = document.querySelector(".f-name");
+let lastNameLblEl = document.querySelector(".l-name");
+let userNameLblEl = document.querySelector(".user-name");
+let emailLblEl = document.querySelector(".e-mail");
+let dateOfBirthLblEl = document.querySelector(".b-date");
+let phoneLblEl = document.querySelector(".phone");
+let updateBtnEl = document.querySelector(".update-btn");
+let changePassWordBtnEl = document.querySelector(".change-password-btn");
+
+let updateInfosFormEl = document.querySelector(".update-infos-model");
+let updateInfosCloseBtn = document.querySelector(".update-close-btn");
+let changePassWordCloseBtn = document.querySelector(".change-password-close-btn");
+let changePassWordFormEl = document.querySelector(".change-password-model");
+
+let updateFirstNameInputEl = document.querySelector(".update-fname");
+let updateLastNameInputEl = document.querySelector(".update-lname");
+let updateEmailInputEl = document.querySelector(".update-e-mail");
+let updatePhoneInputEl = document.querySelector(".update-phone");
+let updateBirthDateInputEl = document.querySelector(".update-b-date");
+let updateUserNameInputEl = document.querySelector(".update-user-name");
+let updateSubmitBtnEl = document.querySelector(".submit");
+
+let currentPassWordInputEl = document.querySelector(".current-password");
+let newPassWordInputEl = document.querySelector(".new-password");
+let comfirmPassWordInputEl = document.querySelector(".change-password-comfirm-password");
+let changePasswordSubmitBtnEl = document.querySelector(".change-password-submit-btn");
+
+let updateFields = document.querySelectorAll(".update-input");
+
+
+let updateInfosErrorMsgEl  =document.querySelector(".update-infos-error-msg");
+let changePasswordErrorMsgEl = document.querySelector(".change-password-error-msg");
+
+let updateUserMessageBoxEl = document.querySelector(".update-comfirm-msg");
+let updateUserMessageBoxMsgEl = document.querySelector(".u-message");
+let updateUserYesBtnEl = document.querySelector(".u-yes");
+let updateUserNoBtnEl = document.querySelector(".u-no");
+
+/* console.log(updateFirstNameInputEl);*/
+/* console.log(updateUnserMessageBoxEl);
+console.log(updateUnserMessageBoxMsgEl);
+console.log(updateUnserYesBtnEl);
+console.log(updateUnserNoBtnEl); */
+
+
+
 
 let timeOutId;
 let hasShow = false;
@@ -92,6 +139,31 @@ class clsTransaction {
     this.TransactionAmmount = TransactionAmmount;
     this.TransactionDate = TransactionDate;
   }
+}
+
+class clsUser
+{
+     UserId 
+     FirstName 
+     LastName 
+     UserName 
+     PassWord
+     Email 
+     Phone 
+     BirthDate 
+
+   constructor( UserId,  FirstName,  LastName,  UserName, PassWord ,  Email,
+         Phone,  BirthDate)
+    {
+        this.UserId = UserId;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.UserName = UserName;
+        this.PassWord = PassWord;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BirthDate = BirthDate;
+    }
 }
 
 function performVisualEffect() {
@@ -583,10 +655,312 @@ function comfirmTransfer()
 
 }
 
+function renderPersonalInfos()
+{
+    firstNameLblEl.textContent = currentUser.firstName;
+    lastNameLblEl.textContent = currentUser.lastName;
+    userNameLblEl.textContent = currentUser.userName;
+    emailLblEl.textContent = currentUser.email;
+    phoneLblEl.textContent = currentUser.phone;
+    dateOfBirthLblEl.textContent =formatDate (currentUser.birthDate).slice(0,10);
+}
+function showHideUpdateUserForms()
+{
+  updateBtnEl.addEventListener("click",()=>{
+    displayElement(overlayEl);
+    displayElement(updateInfosFormEl);
+  });
+  
+  updateInfosCloseBtn.addEventListener("click",()=>{
+    hideElement(overlayEl);
+    hideElement(updateInfosFormEl);
+  });
+  
+  changePassWordBtnEl.addEventListener("click",()=>{
+    displayElement(overlayEl);
+    displayElement(changePassWordFormEl)
+  });
+  
+  changePassWordCloseBtn.addEventListener("click",()=>{
+    hideElement(overlayEl);
+    hideElement(changePassWordFormEl)
+  });
+
+}
+
+
+
+async function isUserNameAlreadyExists(userName)
+{
+    try
+    {
+        let response = await fetch(`http://localhost:5104/api/Users/IsUserExistsByUserName?UserName=${userName}`);
+
+        if(!response.ok)
+            {
+                throw new Error(`${response.statusText}`);
+            }
+
+        let data = await response.json();
+        return data;
+    }
+    catch(err)
+    {
+    }
+    return null;
+}
+
+async function IsEmailExists(email)
+{
+  
+    try
+    {
+        let response =await fetch(`http://localhost:5104/api/Users/ExistsByEmail?Email=${email}`);
+
+        if(!response.ok)
+            {
+                throw new Error(`${response.statusText}`);
+            }
+
+        let data = await response.json();
+        return data;
+    }
+    catch(err)
+    {
+
+    }
+    return null;
+}
+
+function CheckFieldsEmpty()
+{
+    let isEmpty = false;
+    updateFields.forEach((field)=>{
+       if(!field.value)
+        {
+            changeInputBackGround(field);
+           isEmpty =  true; 
+        }
+          
+    })
+
+        return isEmpty;
+}
+
+function resetInputsBackGroundColor()
+{
+  updateFields.forEach((field)=>{
+        if(field.value)
+         {
+            field.style.backgroundColor = "aliceblue"; 
+             field.style.border = "solid 1px gray"
+         }
+           
+     })
+   
+
+}
+
+function ValidateEmailField()
+{
+    updateEmailInputEl.addEventListener("input",()=>{
+        if(!updateEmailInputEl.value || updateEmailInputEl.value === currentUser.email)
+          return;
+        IsEmailExists(updateEmailInputEl.value).then(function(res){
+             
+            
+            if(res)
+                {
+                    changeInputValueColor(updateEmailInputEl);
+                    changeInputBackGround(updateEmailInputEl);
+                    setError(updateInfosErrorMsgEl,"Email arlready taken by an other user");
+                    hideErrorMessage(updateInfosErrorMsgEl);
+                    changeElementEnabledStatus(updateSubmitBtnEl, true);
+                   
+
+                }
+                else
+                {
+                    //hideErrorMessage();
+                    resetInputBackGround(updateEmailInputEl);
+                    resetInputValueColor(updateEmailInputEl); 
+                    changeElementEnabledStatus(updateSubmitBtnEl,false);
+                }
+                
+        })
+    });
+}
+
+function ValidateUserNameInput()
+{
+
+    updateUserNameInputEl.addEventListener("input",function(){
+        if(!updateUserNameInputEl.value || updateUserNameInputEl.value === currentUser.userName)
+            return;
+        isUserNameAlreadyExists(updateUserNameInputEl.value).then(function(res){
+                if(res)
+                {
+                
+                    setError(updateInfosErrorMsgEl,"User name Already exists");
+                    hideErrorMessage(updateInfosErrorMsgEl);
+                    changeInputBackGround(updateUserNameInputEl);
+                    changeInputValueColor(updateUserNameInputEl);
+                    changeElementEnabledStatus(updateSubmitBtnEl, true);
+                }
+                else
+                {
+                        
+                        resetInputBackGround(updateUserNameInputEl);
+                        resetInputValueColor(updateUserNameInputEl); 
+                        changeElementEnabledStatus(updateSubmitBtnEl,false);
+                }
+        })
+    })
+}
+function validateAllFields(fields)
+{
+  fields.forEach(field =>{
+
+    field.addEventListener("input",()=>{
+      if(!field.value)
+        {
+          changeInputBackGround(field);
+        }
+        else
+        resetInputBackGround(field);
+    });
+  
+  });
+
+}
+
+
+function changeElementEnabledStatus(el , status)
+{
+    el.disabled = status;
+    if(status)
+        {
+            el.style.opacity = '0.5';
+        }
+        else
+        el.style.opacity = '1';
+}
+
+function changeInputValueColor(field)
+{
+    field.style.color = "red";
+}
+
+function changeInputBackGround(field)
+{
+    field.style.backgroundColor = "rgba(220, 20, 60, 0.351)";
+    field.style.border = "solid 1px red"
+}
+
+function resetInputValueColor(field)
+{
+    field.style.color = "#313030";
+}
+
+function resetInputBackGround(field)
+{
+     field.style.backgroundColor = "aliceblue"; 
+     field.style.border = "solid 1px gray" 
+}
+
+function clearFields(fields)
+{
+    fields.forEach(field =>{
+        field.value = '';
+    });
+}
+
+async function updateUserInfos(userId , newUserObject)
+{
+   try
+   {
+      let response = await fetch(`http://localhost:5104/api/Users/${userId}`,{
+        method:"PUT",
+        headers : {
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(newUserObject)
+      });
+
+      if(!response.ok)
+        {
+          throw new Error(`${response.statusText}`);
+        }
+
+      let data = await response.json();
+      return data;
+   }
+   catch(err)
+   {
+
+   }
+
+   return null;
+}
+
+function performUserInfosUpdate()
+{
+
+  updateSubmitBtnEl.addEventListener("click",()=>{
+      if(CheckFieldsEmpty())
+        {
+          setError(updateInfosErrorMsgEl,"you must fill all the fields above");
+          resetInputsBackGroundColor();
+          hideErrorMessage(updateInfosErrorMsgEl);
+        
+        }
+        else
+        {
+          resetInputsBackGroundColor();
+          displayElement(overlayEl);
+          displayElement(updateUserMessageBoxEl);
+        
+        }
+  });
+
+}
+function comfirmInfosUpdate()
+{
+  updateUserYesBtnEl.addEventListener("click",()=>{
+    updateUserInfos(currentUser.userId , new clsUser(0,updateFirstNameInputEl.value , updateLastNameInputEl.value,
+      updateUserNameInputEl.value , "**",updateEmailInputEl.value, updatePhoneInputEl.value, 
+      updateBirthDateInputEl.value
+    )).then(function(res){
+        currentUser  =res;
+    });
+      updateUserMessageBoxMsgEl.textContent = "your infos have been updated successfully";
+    setTimeout(()=>{
+        hideElement(updateInfosFormEl);
+        hideElement(overlayEl);
+        hideElement(updateUserMessageBoxEl);
+        clearFields(updateFields);
+        renderPersonalInfos();
+        loadHeadersData();
+    },3000)
+  });
+  
+  updateUserNoBtnEl.addEventListener("click",()=>{
+   // hideElement(overlayEl);
+    hideElement(updateUserMessageBoxEl);
+    //clearFields(updateFields);
+    updateUserMessageBoxMsgEl.textContent = "do you want to submit changes?";
+  });
+
+
+}
+
+
 performVisualEffect();
 loadHeadersData();
+renderPersonalInfos();
 markTabSelected();
 navigateThroughSections();
+showHideUpdateUserForms();
 renderDepositsAndWithdrawsRecords();
 renderTransfersList();
 performDeposit();
@@ -596,7 +970,37 @@ comfirmWithdraw();
 
 performTransfer();
 comfirmTransfer();
- //AddNewTransaction(new clsTransaction(0,100,null,140,new Date("2020-01-01"))).then((res)=>console.log(res)); 
 
+ValidateEmailField();
+ValidateUserNameInput();
+validateAllFields(updateFields);
 
- 
+performUserInfosUpdate();
+comfirmInfosUpdate();
+  
+//updateUserInfos(16 , new clsUser(0,"aziza","boulatrous","azzouza" , "1234","azziza@gmail.com","0560221478",new Date("2020-12-12"))).then(res=>console.log(res));
+
+/* updateUserYesBtnEl.addEventListener("click",()=>{
+  updateUserInfos(currentUser.userId , new clsUser(0,updateFirstNameInputEl.value , updateLastNameInputEl.value,
+    updateUserNameInputEl.value , "**",updateEmailInputEl.value, updatePhoneInputEl.value, 
+    updateBirthDateInputEl.value
+  )).then(function(res){
+      currentUser  =res;
+  });
+    updateUserMessageBoxMsgEl.textContent = "your infos have been updated successfully";
+  setTimeout(()=>{
+      hideElement(updateInfosFormEl);
+      hideElement(overlayEl);
+      hideElement(updateUserMessageBoxEl);
+      clearFields(updateFields);
+      renderPersonalInfos();
+      loadHeadersData();
+  },3000)
+});
+
+updateUserNoBtnEl.addEventListener("click",()=>{
+  hideElement(overlayEl);
+  hideElement(updateUserMessageBoxEl);
+  //clearFields(updateFields);
+  updateUserMessageBoxMsgEl.textContent = "do you want to submit changes?";
+}); */

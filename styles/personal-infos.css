@@ -79,6 +79,7 @@
     right: 0;
     background-color: rgba(119, 117, 117, 0.274);
     backdrop-filter: blur(10px);
+    z-index: 99;
 }
 
 .open-account-model
@@ -101,6 +102,13 @@
     transition: all 0.5s;
     box-shadow: 7px 7px 6px rgb(73, 73, 73);
     border-radius: 10px;
+    z-index: 100;
+}
+
+.change-password-model
+{
+    height: 300px;
+    top: 150px;
 }
 
 .title
@@ -113,7 +121,7 @@
 .form
 {
     height: 83%;
-   
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

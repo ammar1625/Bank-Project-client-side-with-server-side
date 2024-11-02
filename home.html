@@ -222,40 +222,40 @@
             <div class="form">
                 <div class="field">
                     <p class="label">first name </p>
-                    <input type="text" class="input-field f-name update-fname">
+                    <input type="text" class="input-field update-input f-name update-fname">
                 </div>
 
                 <div class="field">
                     <p class="label">last name </p>
-                    <input type="text" class="input-field l-name update-lname">
+                    <input type="text" class="input-field update-input l-name update-lname">
                 </div>
 
                 <div class="field">
                     <p class="label">e-mail </p>
-                    <input type="email" class="input-field e-mail update-e-mail">
+                    <input type="email" class="input-field update-input e-mail update-e-mail">
                 </div>
 
                 <div class="field">
                     <p class="label">phone number</p>
-                    <input type="tel" class="input-field phone update-phone">
+                    <input type="number" class="input-field update-input phone update-phone" >
                 </div>
 
                 <div class="field">
                     <p class="label">date of birth </p>
-                    <input type="date" class="input-field birth-date update-b-date">
+                    <input type="date" class="input-field update-input birth-date update-b-date">
                 </div>
 
                 <div class="field">
                     <p class="label">user name </p>
-                    <input type="text" class="input-field user-name update-user-name">
+                    <input type="text" class="input-field update-input user-name update-user-name">
                 </div>
 
             
-                <p class="empty-field-error hidden">you must fill all the fields !</p>
+                <p class="empty-field-error update-infos-error-msg invisible">you must fill all the fields !</p>
                 <button class="submit">submit</button>
                 
         </div>
-        <button class="close-btn">X</button>
+        <button class="close-btn update-close-btn">X</button>
     </div>
 
     <div class="open-account-model change-password-model hidden">
@@ -265,24 +265,24 @@
         <div class="form ">
             <div class="field">
                 <p class="label">current password </p>
-                <input type="password" class="input-field current-password">
+                <input type="password" class="input-field change-input current-password">
             </div>
             <div class="field">
                 <p class="label">new password </p>
-                <input type="password" class="input-field new-password">
+                <input type="password" class="input-field change-input new-password">
             </div>
 
             <div class="field">
                 <p class="label">comfirm password </p>
-                <input type="password" class="input-field comfirm-password">
+                <input type="password" class="input-field change-input change-password-comfirm-password">
             </div>
 
         
-            <p class="empty-field-error hidden">you must fill all the fields !</p>
-            <button class="submit">submit</button>
+            <p class="empty-field-error change-password-error-msg invisible">you must fill all the fields !</p>
+            <button class="submit change-password-submit-btn">submit</button>
             
     </div>
-    <button class="close-btn">X</button>
+    <button class="close-btn change-password-close-btn">X</button>
 </div>
 
 <div class="comfirm-msg hidden">
@@ -312,6 +312,16 @@
     <div class="buttons">
         <button class="button yes t-yes  ">yes</button>
         <button class="button no t-no ">no</button>
+    </div>
+</div>
+
+<div class="comfirm-msg update-comfirm-msg hidden">
+    <div class="dialog">
+        <p class="message u-message">do you want to perform this action?</p>
+    </div>
+    <div class="buttons">
+        <button class="button yes u-yes  ">yes</button>
+        <button class="button no u-no ">no</button>
     </div>
 </div>
 
