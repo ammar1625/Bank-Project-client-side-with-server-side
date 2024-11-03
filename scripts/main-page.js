@@ -125,16 +125,26 @@ let logOutMessageBoxMsgEl = document.querySelector(".l-message");
 let logOutYesBtnEl = document.querySelector(".l-yes");
 let logOutNoBtnEl = document.querySelector(".l-no");
 
+let closeMessageBoxEl = document.querySelector(".close-comfirm-msg");
+let closeMessageBoxMsgEl = document.querySelector(".close-message");
+let clsoeYesBtnEl = document.querySelector(".close-yes");
+let closeNoBtnEl = document.querySelector(".close-no");
+
+let closePassWordComfirmInputEl = document.querySelector(".comfirm-password");
+let closeUserComfirmInputEl = document.querySelector(".comfirm-user");
+let closeAccountBtnEl = document.querySelector(".close-acc-btn");
+let closeAccErrorMessageEl = document.querySelector(".close-acc-error-message");
+
 /*  console.log(currentPassWordInputEl);
  console.log(newPassWordInputEl);
 console.log(changeComfirmPassWordInputEl);
 console.log(changePassWordErrorMsgEl);
 console.log(changePassWordSubmitBtnEl); 
 console.log(changePassWordMessageBoxEl); */
-/* console.log(logOutMessageBoxEl); 
-console.log(logOutMessageBoxMsgEl); 
-console.log(logOutYesBtnEl); 
-console.log(logOutNoBtnEl);  */ 
+/*  console.log(closePassWordComfirmInputEl); 
+console.log(closeUserComfirmInputEl); 
+console.log(closeAccountBtnEl);  */
+  
 
 
 
@@ -197,6 +207,7 @@ function performVisualEffect() {
 
 function renderDepositsAndWithdrawsRecords() {
   let html = "";
+  depositsAndWithdrawsHistoryContainerEl.innerHTML ="";
   getDepositsAndWithdrawsList(currentAccount.accountId).then(function (movRes) {
     for (let mov of movRes) {
       let action = mov.transactionAmmount < 0 ? "withdraw" : "deposit";
@@ -429,18 +440,22 @@ function comfirmdeposit()
                        new Date("2020-01-01")
                    )
                    ).then(function (res) {
-                     
-                   
+                     // renderDepositsAndWithdrawsRecords();
                    });
            messageBoxMsgEl.textContent = `${depositInputEl.value} $ has been deposited successfully to your account`;
 
            setTimeout(() => {
            hideElement(overlayEl);
-           hideElement(messageBoxEl);
-           renderDepositsAndWithdrawsRecords();
-           updateBalance();
+           hideElement(messageBoxEl);   
+           
            clearInput(depositInputEl);
            }, 3000);
+
+           setTimeout(()=>{
+           updateBalance();
+           renderDepositsAndWithdrawsRecords();
+           },6000);
+        
        });
 
        noBtnEl.addEventListener("click", () => {
@@ -501,17 +516,21 @@ function comfirmWithdraw()
         new Date("2020-01-01")
       )
     ).then(function (res) {
-     
     });
     withdrawMessageBoxMsgEl.textContent = `${withdrawInputEl.value} $ has been withdrew successfully from your account`;
 
     setTimeout(() => {
       hideElement(overlayEl);
       hideElement(withdrawMessageBoxEl);
-      renderDepositsAndWithdrawsRecords();
-      updateBalance();
+      //updateBalance();
       clearInput(withdrawInputEl);
     }, 3000);
+
+    setTimeout(()=>{
+      updateBalance();
+      renderDepositsAndWithdrawsRecords();
+      },6000);
+
   });
 
   withdNoBtnEl.addEventListener("click", () => {
@@ -565,6 +584,7 @@ function renderTransfersList()
     let html = "";
     let action="";
     let user="";
+    TransactionsHistoryCtrEl.innerHTML = "";
     getTransfersByAccountId(currentAccount.accountId).then(function(transfersList){
         
         for(let trans of transfersList)
@@ -575,7 +595,7 @@ function renderTransfersList()
                  
                 html = 
                 `
-                    <div class="tran-history-el history-el">
+                                <div class="tran-history-el history-el">
                                     <p class="movement-type">${action}</p>
                                      <p class="movement-ammount">${trans.transactionAmmount}$</p>
                                      <p class="source"> <span class="user">${user}</span> </p>
@@ -587,6 +607,8 @@ function renderTransfersList()
             }
 
     });
+
+    
 }
 
 function performTransfer()
@@ -653,19 +675,24 @@ function comfirmTransfer()
    tranYesBtnEl.addEventListener("click",()=>{
       AddNewTransaction(new clsTransaction(0,currentAccount.accountId, destinationAccountId ,
          Number.parseFloat(transferAmmountInputEl.value), new Date("2020-01-01"))).then(function(res){
-
+         transMessageBoxMsgEl.textContent =  `${transferAmmountInputEl.value} $ has been transfered successfully to ${res.recieverUserInfo.userName}`;
+         
          });
 
-         transMessageBoxMsgEl.textContent =  `${transferAmmountInputEl.value} $ has been transfered successfully`;
 
          setTimeout(()=>{
-            updateBalance();
-            renderTransfersList();
             hideElement(overlayEl);
             hideElement(transferMessageBoxEl);
             clearInput(transferAmmountInputEl);
             clearInput(destinationUserInptEl);
+            //updateBalance();
          },3000);
+
+         setTimeout(()=>{
+            updateBalance();
+            renderTransfersList();
+         },6000);
+        
    });
 
    tranNoBtnEl.addEventListener("click",()=>{
@@ -1080,26 +1107,31 @@ function performLogout()
   });
 }
 
+function logOut()
+{
+  logOutMessageBoxMsgEl.textContent = "loging out...";
+
+  setTimeout(()=>{
+    hideElement(logOutMessageBoxEl);
+    logOutMessageBoxMsgEl.textContent = "do you want to log-out?";
+  },1500);
+
+  setTimeout(()=>{
+    displayElement(overlayEl);
+  },2500);
+
+  setTimeout(()=>{
+    location.href = "http://127.0.0.1:5500/index.html"
+    hideElement(overlayEl);
+    currentUser = null;
+    currentAccount = null;
+  },3500);
+}
+
 function comfirmLogOut()
 {
     logOutYesBtnEl.addEventListener("click",()=>{
-      logOutMessageBoxMsgEl.textContent = "loging out...";
-
-      setTimeout(()=>{
-        hideElement(logOutMessageBoxEl);
-      logOutMessageBoxMsgEl.textContent = "do you want to log-out?";
-      },1500);
-
-      setTimeout(()=>{
-        displayElement(overlayEl);
-      },2500);
-
-      setTimeout(()=>{
-        location.href = "http://127.0.0.1:5500/index.html"
-        hideElement(overlayEl);
-        currentUser = null;
-        currentAccount = null;
-      },3500);
+      logOut();
     });
 
     logOutNoBtnEl.addEventListener("click",()=>{
@@ -1107,6 +1139,122 @@ function comfirmLogOut()
       logOutMessageBoxMsgEl.textContent = "do you want to log-out?";
     });
 }
+
+async function deleteUserByUserId(userId)
+{
+   try
+   {
+      let response  = await fetch(`http://localhost:5104/api/Users/${userId}`,
+        {
+          method:"DELETE",
+          headers : {
+          "content-type":"application/json"
+        },
+       /*  body  :JSON.stringify(userId) */
+        }
+      );
+      
+      if(!response.ok)
+        {
+          throw new Error(`${response.statusText}`);
+        }
+
+   }
+   catch(err)
+   {
+      
+   }
+}
+
+async function deleteAccountByUserId(userId)
+{
+  try
+  {
+    let response = await fetch(`http://localhost:5104/api/Accounts/${userId}`,
+      {
+        method:"DELETE",
+        headers : {
+          "content-type":"application/json"
+        },
+        /* body  :JSON.stringify(userId) */
+      }
+    );
+
+    if(!response.ok)
+      {
+        throw new Error(`${response.statusText}`);
+      }
+
+     deleteUserByUserId(userId);
+  }
+  catch(err)
+  {
+    
+
+  }
+}
+
+function performAccoutDeletion()
+{
+    closeAccountBtnEl.addEventListener("click",()=>{
+      console.log(currentUser);
+      // in case no data entered return 
+       if(!closeUserComfirmInputEl.value && !closePassWordComfirmInputEl.value)
+        {
+           return;
+        }
+        else if(!closeUserComfirmInputEl.value)
+          {
+              
+              setError(closeAccErrorMessageEl,"you should enter your user name");
+              hideErrorMessage(closeAccErrorMessageEl);
+          }
+          else if(!closePassWordComfirmInputEl.value)
+            {
+                setError(closeAccErrorMessageEl,"you should enter your password");
+                hideErrorMessage(closeAccErrorMessageEl);
+            }
+            else if(closeUserComfirmInputEl.value != currentUser.userName 
+              || closePassWordComfirmInputEl.value != currentUser.password)
+              {
+                 setError(closeAccErrorMessageEl,"wrong user name/password! try agin");
+                hideErrorMessage(closeAccErrorMessageEl);
+              }
+            else
+            {
+              displayElement(overlayEl);
+              displayElement(closeMessageBoxEl)
+            }
+    });
+}
+
+function comfirmAccountDeletion()
+{
+    clsoeYesBtnEl.addEventListener("click",()=>{
+       
+        deleteAccountByUserId(currentUser.userId);
+        closeMessageBoxMsgEl.textContent = "deleting your account...";
+        setTimeout(()=>{
+          clearInput(closeUserComfirmInputEl);
+          clearInput(closePassWordComfirmInputEl);
+           closeMessageBoxMsgEl.textContent = "performing logout...";
+        },3000);
+
+        setTimeout(()=>{
+          closeMessageBoxMsgEl.textContent = "do you want to close your account ?";
+          hideElement(closeMessageBoxEl);
+          logOut();
+        },6000);
+    });
+
+    closeNoBtnEl.addEventListener("click",()=>{
+        hideElement(overlayEl);
+        hideElement(closeMessageBoxEl);
+        closeMessageBoxMsgEl.textContent = "do you want to close your account ?";
+    });
+}
+
+
 
 
 performVisualEffect();
@@ -1140,4 +1288,8 @@ comfirmPasswordChange();
 
 performLogout();
 comfirmLogOut();
+
+performAccoutDeletion();
+comfirmAccountDeletion();
+
 
