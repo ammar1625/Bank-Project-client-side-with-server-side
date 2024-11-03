@@ -91,10 +91,6 @@ let updateBirthDateInputEl = document.querySelector(".update-b-date");
 let updateUserNameInputEl = document.querySelector(".update-user-name");
 let updateSubmitBtnEl = document.querySelector(".submit");
 
-/* let currentPassWordInputEl = document.querySelector(".current-password");
-let newPassWordInputEl = document.querySelector(".new-password");
-let comfirmPassWordInputEl = document.querySelector(".change-password-comfirm-password");
-let changePasswordSubmitBtnEl = document.querySelector(".change-password-submit-btn"); */
 
 let updateFields = document.querySelectorAll(".update-input");
 
@@ -134,19 +130,6 @@ let closePassWordComfirmInputEl = document.querySelector(".comfirm-password");
 let closeUserComfirmInputEl = document.querySelector(".comfirm-user");
 let closeAccountBtnEl = document.querySelector(".close-acc-btn");
 let closeAccErrorMessageEl = document.querySelector(".close-acc-error-message");
-
-/*  console.log(currentPassWordInputEl);
- console.log(newPassWordInputEl);
-console.log(changeComfirmPassWordInputEl);
-console.log(changePassWordErrorMsgEl);
-console.log(changePassWordSubmitBtnEl); 
-console.log(changePassWordMessageBoxEl); */
-/*  console.log(closePassWordComfirmInputEl); 
-console.log(closeUserComfirmInputEl); 
-console.log(closeAccountBtnEl);  */
-  
-
-
 
 
 let timeOutId;
