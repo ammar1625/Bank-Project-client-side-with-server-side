@@ -509,7 +509,7 @@ function PerformLogin()
                         location.href= "http://127.0.0.1:5500/home.html";
                        /*  window.open("http://127.0.0.1:5500/home.html","_blank"); */
                         });
-                    },3000)
+                    },2000)
                 }
                 else
                 {

@@ -120,16 +120,21 @@ let changePassWordNoBtnEl = document.querySelector(".c-no");
 
 let changeFieldsEl  =document.querySelectorAll(".change-input");
 
+let logOutMessageBoxEl = document.querySelector(".logout-comfirm-msg");
+let logOutMessageBoxMsgEl = document.querySelector(".l-message");
+let logOutYesBtnEl = document.querySelector(".l-yes");
+let logOutNoBtnEl = document.querySelector(".l-no");
+
 /*  console.log(currentPassWordInputEl);
  console.log(newPassWordInputEl);
 console.log(changeComfirmPassWordInputEl);
 console.log(changePassWordErrorMsgEl);
 console.log(changePassWordSubmitBtnEl); 
-console.log(changePassWordMessageBoxEl); 
-console.log(changePassWordMessageBoxMsgEl); 
-console.log(changePassWordYesBtnEl); 
-console.log(changePassWordNoBtnEl); 
-console.log(changeFieldsEl);  */
+console.log(changePassWordMessageBoxEl); */
+/* console.log(logOutMessageBoxEl); 
+console.log(logOutMessageBoxMsgEl); 
+console.log(logOutYesBtnEl); 
+console.log(logOutNoBtnEl);  */ 
 
 
 
@@ -937,7 +942,8 @@ function performUserInfosUpdate()
           resetInputsBackGroundColor(updateFields);
           displayElement(overlayEl);
           displayElement(updateUserMessageBoxEl);
-        
+          changeElementEnabledStatus(updateInfosFormEl,true);
+          
         }
   });
 
@@ -953,6 +959,7 @@ function comfirmInfosUpdate()
     });
       updateUserMessageBoxMsgEl.textContent = "your infos have been updated successfully";
     setTimeout(()=>{
+        changeElementEnabledStatus(updateInfosFormEl,false);
         hideElement(updateInfosFormEl);
         hideElement(overlayEl);
         hideElement(updateUserMessageBoxEl);
@@ -963,9 +970,8 @@ function comfirmInfosUpdate()
   });
   
   updateUserNoBtnEl.addEventListener("click",()=>{
-   // hideElement(overlayEl);
     hideElement(updateUserMessageBoxEl);
-    //clearFields(updateFields);
+    changeElementEnabledStatus(updateInfosFormEl,false);
     updateUserMessageBoxMsgEl.textContent = "do you want to submit changes?";
   });
 
@@ -1010,7 +1016,6 @@ function performPassWordChange()
           }
           else
           {
-            console.log(currentUser.password,currentPassWordInputEl.value );
              if(currentPassWordInputEl.value != currentUser.password)
               {
                   setError(changePassWordErrorMsgEl,"wrong password ! try again");
@@ -1031,6 +1036,7 @@ function performPassWordChange()
                 {
                   resetInputsBackGroundColor(changeFieldsEl)
                   displayElement(changePassWordMessageBoxEl);
+                  changeElementEnabledStatus(changePassWordFormEl,true);
                 }
              
           }
@@ -1048,7 +1054,7 @@ function comfirmPasswordChange()
     });
 
     setTimeout(()=>{
-
+      changeElementEnabledStatus(changePassWordFormEl,false);
       hideElement(overlayEl);
       hideElement(changePassWordFormEl);
       hideElement(changePassWordMessageBoxEl);
@@ -1061,8 +1067,47 @@ function comfirmPasswordChange()
 
   changePassWordNoBtnEl.addEventListener('click',()=>{
     hideElement(changePassWordMessageBoxEl);
+    changeElementEnabledStatus(changePassWordFormEl,false);
   });
 }
+
+function performLogout()
+{
+  logoutEl.addEventListener("click",()=>{
+
+      displayElement(logOutMessageBoxEl);
+
+  });
+}
+
+function comfirmLogOut()
+{
+    logOutYesBtnEl.addEventListener("click",()=>{
+      logOutMessageBoxMsgEl.textContent = "loging out...";
+
+      setTimeout(()=>{
+        hideElement(logOutMessageBoxEl);
+      logOutMessageBoxMsgEl.textContent = "do you want to log-out?";
+      },1500);
+
+      setTimeout(()=>{
+        displayElement(overlayEl);
+      },2500);
+
+      setTimeout(()=>{
+        location.href = "http://127.0.0.1:5500/index.html"
+        hideElement(overlayEl);
+        currentUser = null;
+        currentAccount = null;
+      },3500);
+    });
+
+    logOutNoBtnEl.addEventListener("click",()=>{
+      hideElement(logOutMessageBoxEl);
+      logOutMessageBoxMsgEl.textContent = "do you want to log-out?";
+    });
+}
+
 
 performVisualEffect();
 loadHeadersData();
@@ -1092,4 +1137,7 @@ comfirmInfosUpdate();
   
 performPassWordChange();
 comfirmPasswordChange();
+
+performLogout();
+comfirmLogOut();
 
