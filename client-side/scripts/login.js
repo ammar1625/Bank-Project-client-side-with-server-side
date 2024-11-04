@@ -515,8 +515,8 @@ function PerformLogin()
                         saveToLocalStorage("User", CurrentUser);
                         LogInEmailInputEl.value = "";
                         LogInPassWordInputEl.value ="";
-                        location.href= "http://127.0.0.1:5500/home.html";
-                       /*  window.open("http://127.0.0.1:5500/home.html","_blank"); */
+                        location.href = `http://${location.host}/client-side/home.html`;
+                       
                         });
                     },2000)
                 }

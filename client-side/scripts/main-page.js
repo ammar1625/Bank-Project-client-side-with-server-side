@@ -1104,7 +1104,7 @@ function logOut()
   },2500);
 
   setTimeout(()=>{
-    location.href = "http://127.0.0.1:5500/index.html"
+    location.href = `http://${location.host}/client-side/index.html`
     hideElement(overlayEl);
     currentUser = null;
     currentAccount = null;
