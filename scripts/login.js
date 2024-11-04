@@ -358,8 +358,8 @@ function PerformSubmit()
             {
                 resetInputBackGround();
                 hideErrorMessage();
-                let User  = new clsUser(0 , FirstNameInputEl.value , LastNameInputEl.value, UserNameInPutEl.value,
-                   PassWordInPutEl.value , SignUpEmailInputEl.value , PhoneInputEl.value , BirthDateInPutEl.value) 
+                /* let User  = new clsUser(0 , FirstNameInputEl.value , LastNameInputEl.value, UserNameInPutEl.value,
+                   PassWordInPutEl.value , SignUpEmailInputEl.value , PhoneInputEl.value , BirthDateInPutEl.value) */ 
                 if(ComfirmPassWordInPutEl.value != PassWordInPutEl.value)
                     {
                         ShowErrorMessage("Wrong Comfirmed password");
@@ -368,43 +368,52 @@ function PerformSubmit()
                     {
                         //display comfirm message
                         displayMessageBox();
-
-                        //listen to yes button
-                        YesBtnEl.addEventListener("click",function(){
-                            //fetch posyt api
-                            AddNewUser(User)
-                            .then(function(userres){
-                                setTimeout(()=>{
-                                    //fetch add new account after adding user
-                                    AddNewAccount(new clsAccount(0,userres.userId,  new Date("2020/01/01"))).then(function(accountres){
-                                        ShowUserAddedMessage(`User Addded Successfully user id : ${userres.userId} - account id : ${accountres.accountId}`);
-
-                                    });
-                                },1000)
-                                
-                                
-                             });
-    
-                             hideErrorMessage();
-                             closeMessageBox();
-                             clearFields();
-                             setTimeout(()=>{
-                                CloseBtnEl.click();
-                             },2600);
-                        });
-
-                        //listen to no button
-                        NoBtnEl.addEventListener("click",()=>{
-                            ShowUserAddedMessage(`operation has been canceled`);
-                            closeMessageBox();
-                        });
-                        
                         resetComFirmMessageText();
+                        changeElementEnabledStatus(OpenAccountFormEl,true);
                     }
                
             }
     });
 }
+
+function comfirmSubmit()
+{
+    YesBtnEl.addEventListener("click",function(){
+        let User  = new clsUser(0 , FirstNameInputEl.value , LastNameInputEl.value, UserNameInPutEl.value,
+            PassWordInPutEl.value , SignUpEmailInputEl.value , PhoneInputEl.value , BirthDateInPutEl.value)
+        //fetch post api
+        AddNewUser(User)
+        .then(function(userres){
+            setTimeout(()=>{
+                //fetch add new account after adding user
+                AddNewAccount(new clsAccount(0,userres.userId,  new Date("2020/01/01"))).then(function(accountres){
+                    ShowUserAddedMessage(`User Addded Successfully user id : ${userres.userId} - account id : ${accountres.accountId}`);
+
+                });
+            },1000)
+            
+            
+         });
+
+         hideErrorMessage();
+         closeMessageBox();
+         clearFields();
+         setTimeout(()=>{
+            CloseBtnEl.click();
+            changeElementEnabledStatus(OpenAccountFormEl,false);
+
+         },2600);
+    });
+
+    //listen to no button
+    NoBtnEl.addEventListener("click",()=>{
+        ShowUserAddedMessage(`operation has been canceled`);
+        changeElementEnabledStatus(OpenAccountFormEl,false);
+
+        closeMessageBox();
+    });
+}
+
 function ValidateUserNameInput()
 {
 
@@ -534,6 +543,7 @@ hideOpenAccountForm();
 ValidateUserNameInput();
 ValidateEmailField();
 PerformSubmit();
+comfirmSubmit();
 PerformLogin();
 
 
