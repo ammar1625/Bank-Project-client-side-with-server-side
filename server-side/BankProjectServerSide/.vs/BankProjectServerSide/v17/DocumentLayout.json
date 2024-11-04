@@ -1,0 +1,136 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\repos\\bank-server\\BankProjectServerSide\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CC9415C5-2324-47D6-BFFE-4803789DF7FF}|BankProjectServerSide.csproj|c:\\repos\\bank-server\\bankprojectserverside\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC9415C5-2324-47D6-BFFE-4803789DF7FF}|BankProjectServerSide.csproj|solutionrelative:controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC9415C5-2324-47D6-BFFE-4803789DF7FF}|BankProjectServerSide.csproj|c:\\repos\\bank-server\\bankprojectserverside\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC9415C5-2324-47D6-BFFE-4803789DF7FF}|BankProjectServerSide.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\repos\\BankProjectBusinessLayer\\clsUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\repos\\BankProjectDataAccessLayer\\clsUserData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\repos\\BankProjectDataAccessLayer\\clsAccountData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\repos\\BankProjectBusinessLayer\\clsTransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\repos\\BankProjectDataAccessLayer\\clsTransactionData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\repos\\bank-server\\BankProjectServerSide\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\repos\\bank-server\\BankProjectServerSide\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAAAMBAAAAAAAAAAAYwLgAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T06:38:01.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "clsUser.cs",
+              "DocumentMoniker": "C:\\repos\\BankProjectBusinessLayer\\clsUser.cs",
+              "RelativeDocumentMoniker": "..\\..\\BankProjectBusinessLayer\\clsUser.cs",
+              "ToolTip": "C:\\repos\\BankProjectBusinessLayer\\clsUser.cs",
+              "RelativeToolTip": "..\\..\\BankProjectBusinessLayer\\clsUser.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAUwFcAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T06:36:57.791Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "clsUserData.cs",
+              "DocumentMoniker": "C:\\repos\\BankProjectDataAccessLayer\\clsUserData.cs",
+              "RelativeDocumentMoniker": "..\\..\\BankProjectDataAccessLayer\\clsUserData.cs",
+              "ToolTip": "C:\\repos\\BankProjectDataAccessLayer\\clsUserData.cs",
+              "RelativeToolTip": "..\\..\\BankProjectDataAccessLayer\\clsUserData.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAwMcAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T06:31:57.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "clsAccountData.cs",
+              "DocumentMoniker": "C:\\repos\\BankProjectDataAccessLayer\\clsAccountData.cs",
+              "RelativeDocumentMoniker": "..\\..\\BankProjectDataAccessLayer\\clsAccountData.cs",
+              "ToolTip": "C:\\repos\\BankProjectDataAccessLayer\\clsAccountData.cs",
+              "RelativeToolTip": "..\\..\\BankProjectDataAccessLayer\\clsAccountData.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAADwv0IAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T13:44:56.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "clsTransaction.cs",
+              "DocumentMoniker": "C:\\repos\\BankProjectBusinessLayer\\clsTransaction.cs",
+              "RelativeDocumentMoniker": "..\\..\\BankProjectBusinessLayer\\clsTransaction.cs",
+              "ToolTip": "C:\\repos\\BankProjectBusinessLayer\\clsTransaction.cs",
+              "RelativeToolTip": "..\\..\\BankProjectBusinessLayer\\clsTransaction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD4AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T10:03:17.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "clsTransactionData.cs",
+              "DocumentMoniker": "C:\\repos\\BankProjectDataAccessLayer\\clsTransactionData.cs",
+              "RelativeDocumentMoniker": "..\\..\\BankProjectDataAccessLayer\\clsTransactionData.cs",
+              "ToolTip": "C:\\repos\\BankProjectDataAccessLayer\\clsTransactionData.cs",
+              "RelativeToolTip": "..\\..\\BankProjectDataAccessLayer\\clsTransactionData.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAAAsAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T09:34:51.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TransactionsController.cs",
+              "DocumentMoniker": "C:\\repos\\bank-server\\BankProjectServerSide\\Controllers\\TransactionsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TransactionsController.cs",
+              "ToolTip": "C:\\repos\\bank-server\\BankProjectServerSide\\Controllers\\TransactionsController.cs",
+              "RelativeToolTip": "Controllers\\TransactionsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T09:34:25.851Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
