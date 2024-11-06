@@ -1,4 +1,4 @@
-this is a simple banking web application created 100% by me from from scratch
+this is a simple banking web application created 100% by me from scratch
 the idea was inspired from wise bank web app and the design as well
 i tried to keep it as simple as possibe because it is for learning purposes 
 my main objective was to create a simple but complete back-end and a complete front-end and integrate them with Apis 
