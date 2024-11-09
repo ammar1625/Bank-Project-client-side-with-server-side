@@ -480,7 +480,7 @@ function performWithdraw() {
       displayElement(withdrawMessageBoxEl);
     }
 
-    messageBoxMsgEl.textContent = "do you want to perform this action?";
+    withdrawMessageBoxMsgEl.textContent = "do you want to perform this action?";
     //clearInput(withdrawInputEl);
   });
 }
@@ -625,6 +625,8 @@ function performTransfer()
           }
           else
           {
+              transMessageBoxMsgEl.textContent =  `do you want to perform this action?`;
+             
              let destinationUser;
 
             GetUserByUserName(destinationUserInptEl.value).then(function(user){
@@ -651,6 +653,7 @@ function performTransfer()
          
        
   });
+
 }
 
 function comfirmTransfer()
@@ -681,7 +684,7 @@ function comfirmTransfer()
    tranNoBtnEl.addEventListener("click",()=>{
     hideElement(overlayEl);
     hideElement(transferMessageBoxEl);
-    transMessageBoxMsgEl.textContent =  `do you want to perform this action?`;
+    //transMessageBoxMsgEl.textContent =  `do you want to perform this action?`;
     clearInput(transferAmmountInputEl);
     clearInput(destinationUserInptEl);
    });
