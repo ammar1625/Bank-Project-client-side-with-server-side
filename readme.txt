@@ -18,5 +18,15 @@ Notes:
 //before start using the app first you shoud open the server side folder and run the project and execute it in order to simulate the server is runing and ready to recieve requests
 //to evede any data base connection error you have  to change the connection string data base log in infos and replace them with yours 
 //you can fing the connection string in "BankProjectDataAccessLayer" project exactly in BankProjectDataAccessSettings.cs class there you can modify it according to your personal data base log in infos
-//when you run the client side you should Run the following html file index.html because it is the containing the log-in page 
+//when you run the client side you should Run the following html file "index.html" because it is the containing the log-in page 
 //before performing the log-in you have to open an account you can find a link in the page
+
+++ IMPORTANT IMPORTANT ++
+
+to avoid any error during loading html pages when performing log in or log out operations you have to follow these steps
+
+1- after downloading the project source code take the "client-side" folder and put it inside another folder (create a new folder and copy paste)
+2- when you open the project folder in vs code or whatever code editor you are using select the outer folder (the folder that contains clitent-side folder) 
+and not the client side folder itself
+
+inorder to match the html files paths in javascript code otherwise you will get an error!
